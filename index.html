@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayon Cisarua 3 | Digital Home & Student Portal</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#F97316',   // Primary Warm Orange
+                            hover: '#EA580C',    // Hover Darker Orange
+                            amber: '#F59E0B',    // Soft Accent Warm Gold
+                            warm: '#FFF7ED',     // Light Orange Background fill
+                            light: '#FFEDD5',    // Light Orange Border highlight
+                            slate: '#0F172A',    // Dark Slate text
+                            muted: '#475569',    // Body muted gray
+                            bg: '#FAFAFA'        // Page main background
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0px 10px 30px rgba(249, 115, 22, 0.08)',
+                        'hover-lift': '0px 20px 40px rgba(249, 115, 22, 0.15)',
+                        'modal': '0px 25px 50px -12px rgba(15, 23, 42, 0.25)',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(25px, -30px) scale(1.05)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0F172A;
+            background-color: #FFFFFF;
+        }
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FED7AA;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F97316;
+        }
+
+        /* Glassmorphism navigation header */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(254, 215, 170, 0.6);
+        }
+
+        /* Active link indicator */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #F97316;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Modal backdrop blur */
+        .modal-backdrop {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden relative bg-white">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-orange to-brand-amber flex items-center justify-center text-white font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        RC
+                    </div>
+                    <div>
+                        <span class="font-display font-extrabold text-xl text-brand-slate tracking-tight block leading-none">
+                            Cisarua 3<span class="text-brand-orange">.</span>
+                        </span>
+                        <span class="text-[10px] font-semibold text-brand-muted uppercase tracking-wider">Rayon Digital Home</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex space-x-7 items-center text-sm font-medium">
+                    <a href="#home" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Beranda</a>
+                    <a href="#about-rayon" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Tentang Rayon</a>
+                    <a href="#mentor" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Pembimbing</a>
+                    <a href="#piket" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Jadwal Piket</a>
+                    <a href="#students" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Siswa</a>
+                    <a href="#gallery" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Galeri</a>
+                    <a href="#achievements" class="nav-link text-brand-slate hover:text-brand-orange transition-colors">Prestasi</a>
+                </nav>
+
+                <!-- Auth Buttons / User Profile Badge -->
+                <div class="hidden lg:flex items-center gap-3" id="nav-auth-container">
+                    <button onclick="openLoginModal()" class="flex items-center gap-2 bg-brand-orange hover:bg-brand-hover text-white px-5 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-brand-orange/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fas fa-sign-in-alt text-xs"></i>
+                        <span>Login Siswa</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <button onclick="openLoginModal()" class="text-xs bg-brand-warm text-brand-orange border border-brand-light font-semibold px-3 py-2 rounded-lg mr-1">
+                        Login
+                    </button>
+                    <button id="mobile-menu-btn" class="text-brand-slate hover:text-brand-orange p-2 focus:outline-none" aria-label="Toggle Menu">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col pt-20 px-6 shadow-2xl">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-brand-slate p-2 text-2xl hover:text-brand-orange">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="flex flex-col space-y-5 font-display font-semibold text-lg border-b border-slate-100 pb-8">
+                <a href="#home" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Beranda</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+                <a href="#about-rayon" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Tentang Rayon</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+                <a href="#mentor" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Pembimbing Rayon</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+                <a href="#piket" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Jadwal Piket</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+                <a href="#students" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Data Siswa</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+                <a href="#gallery" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Galeri Momen</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+                <a href="#achievements" class="mobile-link text-brand-slate hover:text-brand-orange flex items-center justify-between">
+                    <span>Prestasi Rayon</span> <i class="fas fa-chevron-right text-xs opacity-40"></i>
+                </a>
+            </div>
+
+            <div class="pt-6" id="mobile-auth-container">
+                <button onclick="openLoginModal()" class="w-full bg-brand-orange text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-brand-orange/20">
+                    <i class="fas fa-user-lock"></i>
+                    <span>Portal Siswa (Login)</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden bg-white">
+        <!-- Background Decorative Blobs -->
+        <div class="absolute top-0 -left-20 w-96 h-96 bg-brand-warm rounded-full mix-blend-multiply filter blur-3xl opacity-80 animate-blob"></div>
+        <div class="absolute top-10 -right-20 w-96 h-96 bg-orange-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Column -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-warm text-brand-orange font-semibold text-xs sm:text-sm mb-6 border border-brand-light shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-orange animate-pulse"></span>
+                        <span>Official Community Hub & Portal</span>
+                    </div>
+
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-slate leading-tight mb-6">
+                        Selamat Datang di <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-amber-500 to-orange-600">Rayon Cisarua 3</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-brand-muted mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Wadah pembentukan karakter, kedisiplinan, dan kekeluargaan siswa. Tempat kita tumbuh bersama, mengukir kenangan manis, dan meraih cita-cita.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#students" class="bg-brand-orange hover:bg-brand-hover text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-brand-orange/25 hover:-translate-y-0.5 transition-all text-center flex items-center justify-center gap-2">
+                            <span>Jelajahi Anggota Siswa</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#gallery" class="bg-white text-brand-slate border-2 border-slate-200 px-8 py-3.5 rounded-full font-semibold hover:border-brand-orange hover:text-brand-orange hover:bg-brand-warm transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-images text-brand-orange"></i>
+                            <span>Lihat Galeri Momen</span>
+                        </a>
+                    </div>
+
+                    <!-- Highlight Stats -->
+                    <div class="mt-12 pt-8 border-t border-slate-100 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <p class="font-display font-extrabold text-2xl lg:text-3xl text-brand-slate">32</p>
+                            <p class="text-xs sm:text-sm text-brand-muted font-medium mt-1">Siswa Aktif</p>
+                        </div>
+                        <div>
+                            <p class="font-display font-extrabold text-2xl lg:text-3xl text-brand-orange">100%</p>
+                            <p class="text-xs sm:text-sm text-brand-muted font-medium mt-1">Semangat High Character</p>
+                        </div>
+                        <div>
+                            <p class="font-display font-extrabold text-2xl lg:text-3xl text-brand-slate">15+</p>
+                            <p class="text-xs sm:text-sm text-brand-muted font-medium mt-1">Penghargaan Rayon</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Visual -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+                        <!-- Main Photo Frame -->
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white z-10 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1000" alt="Kebersamaan Rayon Cisarua 3" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <span class="bg-brand-orange text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mb-1 inline-block">Kebersamaan</span>
+                                <p class="text-sm font-semibold">Kekeluargaan & Semangat Rayon Cisarua 3</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 1 -->
+                        <div class="absolute -top-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-orange-100 z-20 animate-float hidden sm:block">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-lg">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-brand-muted font-medium">Rayon Terdisiplin</p>
+                                    <p class="text-sm font-display font-bold text-brand-slate">Predikat Kebersihan & Kerapihan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 2 -->
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-orange-100 z-20 animate-float hidden sm:block" style="animation-delay: 2s;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-warm text-brand-orange flex items-center justify-center font-bold text-lg">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-brand-muted font-medium">Pembimbing Rayon</p>
+                                    <p class="text-sm font-display font-bold text-brand-slate">Ibu Rina Wulandari, S.Pd.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-rayon" class="py-20 bg-brand-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                    Mengenal Rayon Kami
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                    Tentang Rayon Cisarua 3
+                </h2>
+                <div class="w-16 h-1 bg-brand-orange mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left Narrative -->
+                <div class="space-y-6">
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-soft">
+                        <h3 class="font-display text-2xl font-bold text-brand-slate mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-brand-orange text-white flex items-center justify-center text-sm shadow">
+                                <i class="fas fa-compass"></i>
+                            </span>
+                            Sistem Bimbingan & Karakter
+                        </h3>
+                        <p class="text-brand-muted leading-relaxed mb-4">
+                            Dalam ekosistem sekolah kami, <strong class="text-brand-slate">Rayon</strong> merupakan wadah pengasuhan, bimbingan karakter, serta kelompok sosial utama bagi setiap siswa berdasarkan daerah tempat tinggal.
+                        </p>
+                        <p class="text-brand-muted leading-relaxed">
+                            <strong class="text-brand-orange">Rayon Cisarua 3</strong> menaungi siswa-siswi yang berdomisili di wilayah Cisarua dan sekitarnya. Di sini, kami memadukan bimbingan akademik dengan penanaman kedisiplinan, kemandirian, kepedulian sosial, dan kekeluargaan yang erat.
+                        </p>
+                    </div>
+
+                    <!-- Core Pillars Grid -->
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 text-center shadow-sm">
+                            <div class="w-10 h-10 bg-orange-50 text-brand-orange rounded-xl mx-auto flex items-center justify-center mb-3">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4 class="font-display font-bold text-brand-slate text-sm">Kekeluargaan</h4>
+                            <p class="text-xs text-brand-muted mt-1">Saling merangkul & membantu</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 text-center shadow-sm">
+                            <div class="w-10 h-10 bg-orange-50 text-brand-orange rounded-xl mx-auto flex items-center justify-center mb-3">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h4 class="font-display font-bold text-brand-slate text-sm">Kedisiplinan</h4>
+                            <p class="text-xs text-brand-muted mt-1">Tertib & tepat waktu</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 text-center shadow-sm">
+                            <div class="w-10 h-10 bg-orange-50 text-brand-orange rounded-xl mx-auto flex items-center justify-center mb-3">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="font-display font-bold text-brand-slate text-sm">Prestasi</h4>
+                            <p class="text-xs text-brand-muted mt-1">Aktif & berdaya saing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Feature Box -->
+                <div class="bg-gradient-to-br from-brand-orange via-orange-600 to-amber-700 text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 transform translate-x-8 -translate-y-8 w-48 h-48 bg-white/10 rounded-full blur-xl"></div>
+                    
+                    <h3 class="font-display font-extrabold text-2xl mb-6 relative z-10">
+                        Komitmen & Kebiasaan Baik
+                    </h3>
+
+                    <ul class="space-y-5 relative z-10 text-orange-50">
+                        <li class="flex items-start gap-4">
+                            <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-white font-bold flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Pembiasaan & Karakter Harian</h4>
+                                <p class="text-xs text-orange-100 mt-0.5">Pelaksanaan ibadah rutin, kerapihan, dan pemantauan jurnal kebiasaan baik harian.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-white font-bold flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Lingkungan Suportif & Ramah</h4>
+                                <p class="text-xs text-orange-100 mt-0.5">Ruang aman bebas perundungan, tempat di mana senior dan junior saling membimbing.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-white font-bold flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Monitoring Perkembangan Belajar</h4>
+                                <p class="text-xs text-orange-100 mt-0.5">Pendampingan nilai akademik, kehadiran, dan bimbingan kepribadian siswa.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="mt-8 pt-6 border-t border-white/20 flex items-center justify-between text-xs text-orange-200">
+                        <span>Rayon Cisarua 3 &bull; Wikrama Culture</span>
+                        <span class="font-semibold text-white">#Cisarua3Solid</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Mentor Section -->
+    <section id="mentor" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                    Sosok Pengasuh
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                    Pembimbing Rayon Cisarua 3
+                </h2>
+                <p class="text-brand-muted mt-2">
+                    Mengenal pendamping yang senantiasa membimbing dan mengarahkan kami menuju kebaikan.
+                </p>
+            </div>
+
+            <!-- Mentor Card -->
+            <div class="max-w-4xl mx-auto bg-gradient-to-r from-brand-warm/60 via-white to-orange-50/40 rounded-3xl p-8 sm:p-12 border border-brand-light shadow-soft">
+                <div id="mentor-content-container" class="grid md:grid-cols-12 gap-8 items-center">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Duty Schedule / Jadwal Piket Section -->
+    <section id="piket" class="py-20 bg-brand-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                        Kedisiplinan Kebersihan
+                    </span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                        Jadwal Piket Rayon
+                    </h2>
+                    <p class="text-brand-muted mt-1 text-sm sm:text-base">
+                        Daftar penugasan kebersihan dan ketertiban harian anggota Rayon Cisarua 3.
+                    </p>
+                </div>
+
+                <!-- Admin Duty Control Button -->
+                <div id="piket-admin-controls" class="hidden">
+                    <button onclick="openPiketAdminModal()" class="bg-brand-orange hover:bg-brand-hover text-white px-5 py-2.5 rounded-xl font-semibold text-xs shadow-md flex items-center gap-2">
+                        <i class="fas fa-edit"></i>
+                        <span>Kelola Jadwal Piket (Admin)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Duty Schedule Table / Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="piket-schedule-container">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Student Roster Section -->
+    <section id="students" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                        Data Anggota
+                    </span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                        Daftar Siswa Rayon Cisarua 3
+                    </h2>
+                    <p class="text-brand-muted mt-1 text-sm sm:text-base">
+                        Temukan informasi profil dan peran dari seluruh anggota rayon kami.
+                    </p>
+                </div>
+
+                <!-- Search & Role Filter -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <div class="relative flex-grow sm:w-64">
+                        <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="student-search-input" placeholder="Cari nama atau NIS..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 transition-all">
+                    </div>
+
+                    <select id="student-role-filter" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-brand-slate bg-white focus:outline-none focus:border-brand-orange transition-all cursor-pointer">
+                        <option value="ALL">Semua Peran</option>
+                        <option value="Pengurus">Pengurus Rayon</option>
+                        <option value="Anggota">Anggota Siswa</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Student Grid -->
+            <div id="students-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="students-empty-state" class="hidden text-center py-16 bg-brand-warm/30 rounded-2xl border border-brand-light">
+                <div class="w-16 h-16 bg-orange-100 text-brand-orange rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fas fa-user-slash"></i>
+                </div>
+                <h4 class="font-display font-bold text-lg text-brand-slate">Siswa Tidak Ditemukan</h4>
+                <p class="text-brand-muted text-sm mt-1">Coba kata kunci pencarian atau filter yang berbeda.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Simplified Gallery (Moments Only) -->
+    <section id="gallery" class="py-20 bg-brand-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                    Album Digital
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                    Galeri Momen & Kenangan
+                </h2>
+                <p class="text-brand-muted mt-2">
+                    Kumpulan rekam jejak visual kebersamaan dan kenangan berharga Rayon Cisarua 3.
+                </p>
+            </div>
+
+            <!-- Clean Photo Grid -->
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated via JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Rayon Achievements (Simplified) -->
+    <section id="achievements" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                    Kebanggaan Rayon
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                    Prestasi Rayon Cisarua 3
+                </h2>
+                <p class="text-brand-muted mt-2">
+                    Apresiasi atas capaian dan prestasi membanggakan yang diraih anggota rayon kami.
+                </p>
+            </div>
+
+            <!-- Achievements Grid (Photo + Title/Desc directly underneath) -->
+            <div id="achievements-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Populated via JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Simplified Footer (No Social Links) -->
+    <footer class="bg-brand-slate text-white py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-8 border-b border-slate-800">
+                
+                <!-- Brand Info -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-orange flex items-center justify-center font-extrabold text-xl text-white shadow-md">
+                        RC
+                    </div>
+                    <div>
+                        <span class="font-display font-extrabold text-xl tracking-tight text-white block leading-none">
+                            Rayon Cisarua 3<span class="text-brand-orange">.</span>
+                        </span>
+                        <span class="text-xs text-slate-400">Media Komunikasi & Portal Informasi Resmi Siswa</span>
+                    </div>
+                </div>
+
+                <!-- Class Info -->
+                <div class="text-center md:text-right text-xs text-slate-400 space-y-1">
+                    <p class="font-medium text-slate-300">SMK Wikrama Bogor &bull; Wilayah Cisarua</p>
+                    <p>Pembimbing: Ibu Rina Wulandari, S.Pd.</p>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 text-center text-xs text-slate-500">
+                <p>&copy; <span id="year-span"></span> Rayon Cisarua 3. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-modal border border-slate-100 flex flex-col md:flex-row">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/60 text-white flex items-center justify-center hover:bg-slate-900 transition-colors">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="md:w-3/5 bg-slate-900 flex items-center justify-center min-h-[300px] max-h-[500px] overflow-hidden">
+                <img id="lightbox-img" src="" alt="Gallery Preview" class="w-full h-full object-contain">
+            </div>
+
+            <div class="md:w-2/5 p-6 sm:p-8 flex flex-col justify-between bg-white">
+                <div>
+                    <span id="lightbox-date" class="text-xs text-brand-orange font-bold uppercase tracking-wider inline-block mb-2">
+                        Date
+                    </span>
+                    <h3 id="lightbox-title" class="font-display font-bold text-2xl text-brand-slate mb-3">
+                        Title
+                    </h3>
+                    <p id="lightbox-desc" class="text-brand-muted text-sm leading-relaxed">
+                        Description
+                    </p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-400">
+                    <span>Album Rayon Cisarua 3</span>
+                    <button onclick="closeLightbox()" class="text-brand-orange font-semibold hover:underline">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="relative max-w-md w-full bg-white rounded-3xl shadow-modal border border-slate-100 p-8 transform transition-all">
+            <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-slate-400 hover:text-brand-slate p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-brand-warm text-brand-orange mx-auto flex items-center justify-center text-2xl mb-3 shadow-inner">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <h3 class="font-display font-bold text-2xl text-brand-slate">Portal Login Siswa</h3>
+                <p class="text-xs text-brand-muted mt-1">Masukkan Nama Lengkap dan NIS Anda untuk mengakses profil.</p>
+            </div>
+
+            <div id="login-error-msg" class="hidden mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
+                <i class="fas fa-exclamation-circle text-sm flex-shrink-0"></i>
+                <span id="login-error-text">Nama atau NIS tidak ditemukan!</span>
+            </div>
+
+            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1.5">Nama Lengkap Siswa</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="login-fullname" required placeholder="Contoh: Moch Luthfy Naufal" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1.5">Password / NIS</label>
+                    <div class="relative">
+                        <i class="fas fa-key absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="password" id="login-nis" required placeholder="Contoh: 12511074" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-orange hover:bg-brand-hover text-white py-3 rounded-xl font-semibold text-sm shadow-md shadow-brand-orange/20 transition-all flex items-center justify-center gap-2">
+                    <span>Masuk ke Dashboard</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 text-center space-y-2">
+                <p class="text-[11px] text-slate-400">Pilih Akun Uji Coba Cepat:</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button onclick="fillDemoAccount('Moch Luthfy Naufal', '12511074')" class="text-[11px] font-semibold text-brand-orange bg-brand-warm hover:bg-orange-100 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user-shield mr-1"></i> Admin: Moch Luthfy
+                    </button>
+                    <button onclick="fillDemoAccount('Siti Rahma Azzahra', '12511085')" class="text-[11px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user mr-1"></i> Siswa: Siti Rahma
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard / Profile Portal View Modal -->
+    <div id="dashboard-modal" class="fixed inset-0 z-50 hidden bg-brand-bg overflow-y-auto">
+        <!-- Top Navigation -->
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-brand-orange text-white flex items-center justify-center font-bold text-sm">
+                            RC
+                        </div>
+                        <div>
+                            <span class="font-display font-bold text-brand-slate text-base">Portal Siswa</span>
+                            <span class="text-xs text-brand-muted hidden sm:inline-block ml-2 border-l border-slate-200 pl-2">Rayon Cisarua 3</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-2 pr-2 border-r border-slate-200">
+                            <img id="dash-user-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full border border-brand-orange object-cover">
+                            <span id="dash-user-name" class="font-semibold text-xs sm:text-sm text-brand-slate hidden sm:inline-block">User Name</span>
+                        </div>
+
+                        <button onclick="logoutStudent()" class="text-xs bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Keluar</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            
+            <!-- Welcome Banner -->
+            <div class="bg-gradient-to-r from-brand-orange via-orange-600 to-amber-700 rounded-3xl p-6 sm:p-8 text-white shadow-xl mb-8 relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                        Profil Siswa Terverifikasi
+                    </span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl mb-1">
+                        Selamat Datang, <span id="dash-welcome-name">Siswa</span>! 👋
+                    </h2>
+                    <p class="text-orange-100 text-xs sm:text-sm max-w-2xl">
+                        Akses profil pribadi, ganti foto profil Anda, dan pantau pengumuman Rayon Cisarua 3.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+                
+                <!-- Student Profile Card & Photo Manager -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-soft">
+                        
+                        <div class="text-center pb-6 border-b border-slate-100">
+                            <!-- Avatar Display & Edit Action -->
+                            <div class="relative inline-block mb-4 group">
+                                <img id="dash-card-avatar" src="" alt="Student Profile" class="w-28 h-28 rounded-full object-cover border-4 border-brand-warm mx-auto shadow-md">
+                                <button onclick="openAvatarModal()" class="absolute bottom-0 right-0 bg-brand-orange text-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg hover:bg-brand-hover transition-transform hover:scale-110" title="Ubah Foto Profil">
+                                    <i class="fas fa-camera text-xs"></i>
+                                </button>
+                            </div>
+
+                            <h3 id="dash-card-fullname" class="font-display font-bold text-xl text-brand-slate">Full Name</h3>
+                            <div class="flex items-center justify-center gap-2 mt-2">
+                                <span id="dash-card-role" class="text-xs font-semibold text-brand-orange bg-brand-warm px-3 py-1 rounded-full border border-brand-light">Role</span>
+                                <span id="dash-card-admin-badge" class="hidden text-xs font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full border border-purple-200"><i class="fas fa-user-shield mr-1"></i> Admin Rayon</span>
+                            </div>
+
+                            <button onclick="openAvatarModal()" class="mt-4 text-xs font-semibold text-brand-orange hover:underline flex items-center justify-center gap-1 mx-auto">
+                                <i class="fas fa-image"></i>
+                                <span>Ganti Foto Profil</span>
+                            </button>
+                        </div>
+
+                        <!-- Profile Details -->
+                        <div class="pt-6 space-y-3.5 text-xs sm:text-sm">
+                            <div class="flex justify-between items-center py-1">
+                                <span class="text-brand-muted">NIS</span>
+                                <span id="dash-card-nis" class="font-mono font-bold text-brand-slate">12345678</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-t border-slate-50">
+                                <span class="text-brand-muted">Kelas / Major</span>
+                                <span id="dash-card-major" class="font-bold text-brand-slate">PPLG</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-t border-slate-50">
+                                <span class="text-brand-muted">Rayon</span>
+                                <span class="font-bold text-brand-orange">Cisarua 3</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-t border-slate-50">
+                                <span class="text-brand-muted">Pembimbing Rayon</span>
+                                <span class="font-semibold text-brand-slate">Ibu Rina Wulandari, S.Pd.</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-t border-slate-50">
+                                <span class="text-brand-muted">Status Kehadiran</span>
+                                <span class="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Sangat Baik</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Admin Shortcut Options if applicable -->
+                    <div id="dash-admin-shortcut" class="hidden bg-purple-50 border border-purple-200 p-6 rounded-3xl">
+                        <h4 class="font-display font-bold text-purple-900 text-sm mb-2 flex items-center gap-2">
+                            <i class="fas fa-tools text-purple-600"></i>
+                            Akses Pengurus Rayon
+                        </h4>
+                        <p class="text-xs text-purple-700 leading-relaxed mb-4">
+                            Sebagai Pengurus Rayon, Anda memiliki wewenang untuk mengatur Jadwal Piket harian siswa Cisarua 3.
+                        </p>
+                        <button onclick="closeDashboardModal(); openPiketAdminModal();" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2.5 px-4 rounded-xl text-xs transition-colors shadow">
+                            Kelola Jadwal Piket Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Personal Info & Announcements -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Announcements -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-soft">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-display font-bold text-xl text-brand-slate flex items-center gap-2.5">
+                                <span class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center text-sm">
+                                    <i class="fas fa-bell"></i>
+                                </span>
+                                Pengumuman Rayon
+                            </h3>
+                            <span class="text-xs bg-orange-50 text-brand-orange px-2.5 py-1 rounded-md font-semibold border border-brand-light">Penting</span>
+                        </div>
+
+                        <div id="dash-announcements-list" class="space-y-3">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Personal Achievements -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-soft">
+                        <h3 class="font-display font-bold text-xl text-brand-slate mb-6 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">
+                                <i class="fas fa-trophy"></i>
+                            </span>
+                            Capaian Pribadi Anda
+                        </h3>
+
+                        <div id="dash-personal-achievements" class="space-y-4">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Avatar Modal -->
+    <div id="avatar-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="relative max-w-md w-full bg-white rounded-3xl shadow-modal border border-slate-100 p-6 sm:p-8">
+            <button onclick="closeAvatarModal()" class="absolute top-5 right-5 text-slate-400 hover:text-brand-slate p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <h3 class="font-display font-bold text-xl text-brand-slate mb-2">Ubah Foto Profil</h3>
+            <p class="text-xs text-brand-muted mb-6">Pilih foto dari perangkat Anda atau masukkan URL gambar baru.</p>
+
+            <!-- Image Preview Box -->
+            <div class="text-center mb-6">
+                <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-brand-warm mx-auto shadow-md mb-2 bg-slate-100">
+                    <img id="avatar-preview-img" src="" alt="Preview Avatar" class="w-full h-full object-cover">
+                </div>
+                <span class="text-[11px] text-slate-400">Pratinjau Foto Profil</span>
+            </div>
+
+            <!-- Upload Methods -->
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1">Unggah dari Perangkat</label>
+                    <input type="file" id="avatar-file-input" accept="image/*" onchange="previewAvatarFile(event)" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-warm file:text-brand-orange hover:file:bg-orange-100 cursor-pointer">
+                </div>
+
+                <div class="relative flex py-1 items-center">
+                    <div class="flex-grow border-t border-slate-200"></div>
+                    <span class="flex-shrink mx-2 text-[10px] text-slate-400 uppercase font-bold">atau URL Gambar</span>
+                    <div class="flex-grow border-t border-slate-200"></div>
+                </div>
+
+                <div>
+                    <input type="url" id="avatar-url-input" oninput="previewAvatarUrl(this.value)" placeholder="https://example.com/photo.jpg" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-orange">
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-2">
+                <button onclick="resetAvatarToDefault()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition-colors">
+                    Hapus / Reset
+                </button>
+                <button onclick="saveProfileAvatar()" class="flex-grow bg-brand-orange hover:bg-brand-hover text-white py-2.5 rounded-xl font-semibold text-xs shadow-md transition-all">
+                    Simpan Foto Profil
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Piket Admin Management Modal -->
+    <div id="piket-admin-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="relative max-w-2xl w-full bg-white rounded-3xl shadow-modal border border-slate-100 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <button onclick="closePiketAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-brand-slate p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider inline-block mb-1">Panel Admin Rayon</span>
+                <h3 class="font-display font-bold text-2xl text-brand-slate">Kelola Jadwal Piket</h3>
+                <p class="text-xs text-brand-muted mt-1">Atur penugasan piket siswa untuk setiap hari kerja.</p>
+            </div>
+
+            <!-- Add Duty Form -->
+            <div class="bg-brand-warm/60 border border-brand-light p-4 rounded-2xl mb-6 space-y-3">
+                <h4 class="font-display font-bold text-xs text-brand-slate uppercase tracking-wider">Tambah Tugas Piket</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <select id="piket-add-student" class="px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-brand-slate">
+                        <!-- Populated dynamically -->
+                    </select>
+                    <select id="piket-add-day" class="px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-brand-slate">
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                    </select>
+                    <button onclick="addStudentToPiket()" class="bg-brand-orange hover:bg-brand-hover text-white text-xs font-semibold py-2 rounded-xl shadow transition-all">
+                        + Tambahkan Siswa
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Schedule Management List -->
+            <div class="space-y-4">
+                <h4 class="font-display font-bold text-sm text-brand-slate">Daftar Penugasan Saat Ini:</h4>
+                <div id="piket-admin-list" class="space-y-2">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 text-right">
+                <button onclick="closePiketAdminModal()" class="bg-brand-slate text-white px-5 py-2 rounded-xl text-xs font-semibold hover:bg-slate-800">
+                    Selesai & Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript Data Architecture & App Logic -->
+    <script>
+        /* ==========================================================================
+           DATA ARCHITECTURE & INITIAL STATE
+           ========================================================================== */
+
+        // Mentor Data
+        const mentorData = {
+            name: "Ibu Rina Wulandari, S.Pd.",
+            title: "Pembimbing Rayon Cisarua 3",
+            photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
+            bio: "Pendamping dan pengasuh Rayon Cisarua 3 yang berdedikasi dalam membangun kedisiplinan, etika kerja, serta rasa kekeluargaan yang erat bagi para siswa.",
+            quote: "Karakter yang tangguh dan semangat belajar tiada henti adalah fondasi utama meraih impian. Di Rayon Cisarua 3, kita tumbuh bersama."
+        };
+
+        // Master Student Roster
+        let studentsData = [
+            {
+                nis: "12511074",
+                fullname: "Moch Luthfy Naufal",
+                role: "Ketua Rayon",
+                isOfficer: true,
+                isAdmin: true, // Rayon Administrator privileges
+                major: "PPLG (Pengembangan Perangkat Lunak)",
+                photo: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Juara 1 Web Development Competition", level: "Tingkat Kota", date: "Juli 2026" },
+                    { title: "Sertifikasi Junior Software Engineer", level: "Nasional", date: "Mei 2026" }
+                ]
+            },
+            {
+                nis: "12511085",
+                fullname: "Siti Rahma Azzahra",
+                role: "Wakil Ketua Rayon",
+                isOfficer: true,
+                isAdmin: false,
+                major: "TJKT (Teknik Jaringan Komputer)",
+                photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Juara 2 Cisco Network Challenge", level: "Tingkat Provinsi", date: "Juni 2026" }
+                ]
+            },
+            {
+                nis: "12511092",
+                fullname: "Ahmad Fauzi",
+                role: "Sekretaris Rayon",
+                isOfficer: true,
+                isAdmin: false,
+                major: "PPLG",
+                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Best UI/UX Design Hackathon 2026", level: "Tingkat Kota", date: "April 2026" }
+                ]
+            },
+            {
+                nis: "12511101",
+                fullname: "Dewi Lestari",
+                role: "Bendahara Rayon",
+                isOfficer: true,
+                isAdmin: false,
+                major: "DKV (Desain Komunikasi Visual)",
+                photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Juara 1 Poster Design Edukasi", level: "Tingkat Nasional", date: "Maret 2026" }
+                ]
+            },
+            {
+                nis: "12511115",
+                fullname: "Rizky Pratama",
+                role: "Divisi Kedisiplinan",
+                isOfficer: true,
+                isAdmin: false,
+                major: "TJKT",
+                photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Siswa Terdisiplin Pekan Kebiasaan Baik", level: "Tingkat Sekolah", date: "Agustus 2026" }
+                ]
+            },
+            {
+                nis: "12511123",
+                fullname: "Anisa Putri",
+                role: "Divisi Kebersihan",
+                isOfficer: true,
+                isAdmin: false,
+                major: "MPLB (Manajemen Perkantoran)",
+                photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400",
+                achievements: []
+            },
+            {
+                nis: "12511130",
+                fullname: "Bagas Setiawan",
+                role: "Anggota",
+                isOfficer: false,
+                isAdmin: false,
+                major: "PPLG",
+                photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Peserta Logic Programming Olympiad", level: "Tingkat Nasional", date: "Februari 2026" }
+                ]
+            },
+            {
+                nis: "12511142",
+                fullname: "Nabila Zahra",
+                role: "Anggota",
+                isOfficer: false,
+                isAdmin: false,
+                major: "KLN (Kuliner)",
+                photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=400",
+                achievements: []
+            }
+        ];
+
+        // Duty Schedule Data (Jadwal Piket)
+        let scheduleData = [
+            { day: "Senin", students: ["Moch Luthfy Naufal", "Siti Rahma Azzahra"] },
+            { day: "Selasa", students: ["Ahmad Fauzi", "Dewi Lestari"] },
+            { day: "Rabu", students: ["Rizky Pratama", "Anisa Putri"] },
+            { day: "Kamis", students: ["Bagas Setiawan", "Nabila Zahra"] },
+            { day: "Jumat", students: ["Moch Luthfy Naufal", "Rizky Pratama", "Ahmad Fauzi"] }
+        ];
+
+        // Moments Activity Gallery (Simplified - Photo Centric)
+        const galleryData = [
+            {
+                id: 1,
+                title: "Latihan Dasar Kepemimpinan (LDK)",
+                date: "14 Agustus 2026",
+                desc: "Momen kebersamaan seluruh siswa Rayon Cisarua 3 dalam pelatihan karakter dan kepemimpinan.",
+                image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                id: 2,
+                title: "Kunjungan Industri & Tech Expo",
+                date: "22 Juli 2026",
+                desc: "Perjalanan edukatif memperluas wawasan teknologi dan dunia kerja siswa.",
+                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                id: 3,
+                title: "Kolaborasi Proyek Rayon",
+                date: "10 Juni 2026",
+                desc: "Siswa lintas jurusan berkolaborasi merancang karya digital.",
+                image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                id: 4,
+                title: "Peringatan Hari Kemerdekaan",
+                date: "17 Agustus 2026",
+                desc: "Keseruan lomba kebersamaan antar anggota rayon Cisarua 3.",
+                image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                id: 5,
+                title: "Momen Rayon Terbersih Mingguan",
+                date: "02 Mei 2026",
+                desc: "Kebanggaan bersama saat meraih penghargaan kebersihan dan kerapihan rayon.",
+                image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                id: 6,
+                title: "Gathering & Outing Kebersamaan",
+                date: "18 Januari 2026",
+                desc: "Rekreasi perakrabian antara junior dan senior Rayon Cisarua 3.",
+                image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800"
+            }
+        ];
+
+        // Rayon Achievements Data (Simplified Photo + Title & Desc)
+        const achievementsData = [
+            {
+                title: "Rayon Terdisiplin & Terbersih",
+                description: "Meraih penghargaan Rayon dengan standar kerapihan, kebersihan, dan kedisiplinan harian terbaik tingkat sekolah.",
+                image: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                title: "Juara 1 Web Development Competition",
+                description: "Diraih oleh Moch Luthfy Naufal dalam ajang kompetisi desain & pengembangan web tingkat kota.",
+                image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                title: "Juara 1 Poster Design Edukasi",
+                description: "Karya desain komunikasi visual membanggakan oleh Dewi Lestari pada National Student Art Festival.",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600"
+            }
+        ];
+
+        // Rayon Announcements
+        const announcementsData = [
+            {
+                title: "Pemeriksaan Kebiasaan Baik & Kerapihan",
+                date: "Sabtu, 22 Agustus 2026",
+                content: "Diimbau seluruh anggota Rayon Cisarua 3 berkumpul di Aula Rayon tepat pukul 08:00 WIB membawa buku jurnal."
+            },
+            {
+                title: "Evaluasi Piket Harian Minggu Ini",
+                date: "Rabu, 26 Agustus 2026",
+                content: "Seluruh petugas piket diharapkan menjalankan tugas tepat waktu setelah jam pelajaran terakhir."
+            }
+        ];
+
+        // Global State
+        let loggedInUser = null;
+        let tempAvatarSelection = null;
+
+
+        /* ==========================================================================
+           APP INITIALIZATION & RENDERERS
+           ========================================================================== */
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year-span').textContent = new Date().getFullYear();
+            renderMentor();
+            renderPiketSchedule();
+            renderStudents(studentsData);
+            renderGallery();
+            renderAchievements();
+            setupStudentSearch();
+            setupNavbarScroll();
+        });
+
+        // Mentor Section
+        function renderMentor() {
+            const container = document.getElementById('mentor-content-container');
+            container.innerHTML = `
+                <div class="md:col-span-5 text-center">
+                    <div class="relative inline-block">
+                        <img src="${mentorData.photo}" alt="${mentorData.name}" class="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl object-cover border-4 border-white shadow-lg mx-auto">
+                        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-brand-orange text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow">
+                            Pembimbing
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7 space-y-4 text-center md:text-left">
+                    <div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-brand-slate">${mentorData.name}</h3>
+                        <p class="text-brand-orange font-semibold text-sm mt-1">${mentorData.title}</p>
+                    </div>
+                    <p class="text-brand-muted text-sm sm:text-base leading-relaxed">${mentorData.bio}</p>
+                    <div class="p-4 rounded-2xl bg-white border border-brand-light shadow-sm relative">
+                        <i class="fas fa-quote-left text-brand-orange/20 text-3xl absolute top-3 left-3"></i>
+                        <p class="text-xs sm:text-sm text-brand-slate font-medium italic relative z-10 pl-6">
+                            "${mentorData.quote}"
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Piket / Duty Schedule Renderer
+        function renderPiketSchedule() {
+            const container = document.getElementById('piket-schedule-container');
+            container.innerHTML = scheduleData.map(item => `
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                            <h4 class="font-display font-bold text-base text-brand-slate flex items-center gap-2">
+                                <i class="far fa-calendar-check text-brand-orange text-sm"></i>
+                                ${item.day}
+                            </h4>
+                            <span class="text-[10px] font-bold bg-brand-warm text-brand-orange px-2 py-0.5 rounded-full border border-brand-light">
+                                ${item.students.length} Siswa
+                            </span>
+                        </div>
+                        <ul class="space-y-2">
+                            ${item.students.map(name => `
+                                <li class="text-xs font-medium text-brand-slate flex items-center gap-2 py-1 px-2 rounded-lg bg-slate-50">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                                    <span>${name}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <p class="text-[10px] text-brand-muted mt-4 text-right italic">Piket Kebersihan</p>
+                </div>
+            `).join('');
+
+            // Toggle admin action button if logged in as Admin
+            const adminControls = document.getElementById('piket-admin-controls');
+            if (loggedInUser && loggedInUser.isAdmin) {
+                adminControls.classList.remove('hidden');
+            } else {
+                adminControls.classList.add('hidden');
+            }
+        }
+
+        // Student Roster Renderer
+        function renderStudents(list) {
+            const container = document.getElementById('students-grid');
+            const emptyState = document.getElementById('students-empty-state');
+
+            if (list.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.innerHTML = list.map(student => `
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft hover:shadow-hover-lift hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="${student.photo}" alt="${student.fullname}" class="w-14 h-14 rounded-full object-cover border-2 border-brand-warm shadow-sm flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h4 class="font-display font-bold text-base text-brand-slate truncate">${student.fullname}</h4>
+                                <span class="text-xs font-mono font-medium text-brand-muted">NIS: ${student.nis}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 mb-4">
+                            <span class="inline-block text-[11px] font-semibold ${student.isOfficer ? 'bg-brand-warm text-brand-orange border border-brand-light' : 'bg-slate-100 text-slate-600'} px-2.5 py-0.5 rounded-full">
+                                ${student.role}
+                            </span>
+                            <p class="text-xs text-brand-muted font-medium truncate">${student.major}</p>
+                        </div>
+                    </div>
+                    <button onclick="quickSelectStudent('${student.fullname}', '${student.nis}')" class="w-full text-center py-2 text-xs font-semibold text-brand-orange bg-brand-warm hover:bg-brand-orange hover:text-white rounded-xl transition-colors flex items-center justify-center gap-1.5">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Login Sebagai Siswa</span>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function setupStudentSearch() {
+            const searchInput = document.getElementById('student-search-input');
+            const roleFilter = document.getElementById('student-role-filter');
+
+            function filterData() {
+                const query = searchInput.value.toLowerCase().trim();
+                const role = roleFilter.value;
+
+                const filtered = studentsData.filter(student => {
+                    const matchesQuery = student.fullname.toLowerCase().includes(query) || student.nis.includes(query);
+                    const matchesRole = role === 'ALL' ? true : 
+                        role === 'Pengurus' ? student.isOfficer : !student.isOfficer;
+
+                    return matchesQuery && matchesRole;
+                });
+
+                renderStudents(filtered);
+            }
+
+            searchInput.addEventListener('input', filterData);
+            roleFilter.addEventListener('change', filterData);
+        }
+
+        // Gallery Renderer (Simplified Moments)
+        function renderGallery() {
+            const container = document.getElementById('gallery-grid');
+            container.innerHTML = galleryData.map(item => `
+                <div onclick="openLightbox(${item.id})" class="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-hover-lift hover:-translate-y-1.5 transition-all duration-300 cursor-pointer">
+                    <div class="relative h-56 overflow-hidden bg-slate-100">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white">
+                            <span class="text-[10px] font-bold text-orange-200 uppercase tracking-wider block mb-0.5">${item.date}</span>
+                            <h4 class="font-display font-bold text-base line-clamp-1">${item.title}</h4>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Rayon Achievements Renderer (Simplified Photo + Title & Desc)
+        function renderAchievements() {
+            const container = document.getElementById('achievements-grid');
+            container.innerHTML = achievementsData.map(item => `
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-hover-lift transition-all duration-300 flex flex-col">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-brand-orange text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                            <i class="fas fa-trophy mr-1"></i> Prestasi
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-display font-bold text-lg text-brand-slate mb-2">${item.title}</h4>
+                            <p class="text-xs text-brand-muted leading-relaxed">${item.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+
+        /* ==========================================================================
+           MODALS & INTERACTION HANDLERS
+           ========================================================================== */
+
+        // Lightbox
+        function openLightbox(id) {
+            const item = galleryData.find(g => g.id === id);
+            if (!item) return;
+
+            document.getElementById('lightbox-img').src = item.image;
+            document.getElementById('lightbox-title').textContent = item.title;
+            document.getElementById('lightbox-date').textContent = item.date;
+            document.getElementById('lightbox-desc').textContent = item.desc;
+
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Login Modal
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+            document.getElementById('login-error-msg').classList.add('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function fillDemoAccount(fullname, nis) {
+            document.getElementById('login-fullname').value = fullname;
+            document.getElementById('login-nis').value = nis;
+        }
+
+        function quickSelectStudent(fullname, nis) {
+            openLoginModal();
+            fillDemoAccount(fullname, nis);
+        }
+
+        // Auth Submit
+        function handleLoginSubmit(event) {
+            event.preventDefault();
+            const fullnameInput = document.getElementById('login-fullname').value.trim();
+            const nisInput = document.getElementById('login-nis').value.trim();
+
+            const student = studentsData.find(s => 
+                s.fullname.toLowerCase() === fullnameInput.toLowerCase() && s.nis === nisInput
+            );
+
+            if (student) {
+                loggedInUser = student;
+                closeLoginModal();
+                openDashboard(student);
+                updateNavState();
+                renderPiketSchedule();
+            } else {
+                document.getElementById('login-error-msg').classList.remove('hidden');
+            }
+        }
+
+        // Student Dashboard Portal
+        function openDashboard(student) {
+            document.getElementById('dash-user-name').textContent = student.fullname;
+            document.getElementById('dash-user-avatar').src = student.photo;
+            document.getElementById('dash-welcome-name').textContent = student.fullname;
+
+            document.getElementById('dash-card-avatar').src = student.photo;
+            document.getElementById('dash-card-fullname').textContent = student.fullname;
+            document.getElementById('dash-card-role').textContent = student.role;
+            document.getElementById('dash-card-nis').textContent = student.nis;
+            document.getElementById('dash-card-major').textContent = student.major;
+
+            // Admin badge trigger
+            const adminBadge = document.getElementById('dash-card-admin-badge');
+            const adminShortcut = document.getElementById('dash-admin-shortcut');
+            if (student.isAdmin) {
+                adminBadge.classList.remove('hidden');
+                adminShortcut.classList.remove('hidden');
+            } else {
+                adminBadge.classList.add('hidden');
+                adminShortcut.classList.add('hidden');
+            }
+
+            // Render Announcements
+            const announceList = document.getElementById('dash-announcements-list');
+            announceList.innerHTML = announcementsData.map(a => `
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-display font-bold text-sm text-brand-slate">${a.title}</h4>
+                        <span class="text-[10px] text-slate-400">${a.date}</span>
+                    </div>
+                    <p class="text-xs text-brand-muted leading-relaxed">${a.content}</p>
+                </div>
+            `).join('');
+
+            // Render Personal Achievements
+            const achieveList = document.getElementById('dash-personal-achievements');
+            if (student.achievements && student.achievements.length > 0) {
+                achieveList.innerHTML = student.achievements.map(a => `
+                    <div class="p-4 rounded-2xl bg-orange-50/60 border border-brand-light flex items-center justify-between">
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-brand-slate">${a.title}</h4>
+                            <p class="text-xs text-brand-orange mt-0.5">${a.level} &bull; ${a.date}</p>
+                        </div>
+                        <i class="fas fa-award text-brand-orange text-xl"></i>
+                    </div>
+                `).join('');
+            } else {
+                achieveList.innerHTML = `
+                    <div class="text-center py-6 border border-dashed border-slate-200 rounded-2xl">
+                        <p class="text-xs text-slate-400">Belum ada catatan prestasi personal terdaftar.</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('dashboard-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDashboardModal() {
+            document.getElementById('dashboard-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function logoutStudent() {
+            loggedInUser = null;
+            closeDashboardModal();
+            updateNavState();
+            renderPiketSchedule();
+        }
+
+        // Avatar / Profile Picture Management Feature
+        function openAvatarModal() {
+            if (!loggedInUser) return;
+            tempAvatarSelection = loggedInUser.photo;
+            document.getElementById('avatar-preview-img').src = loggedInUser.photo;
+            document.getElementById('avatar-url-input').value = '';
+            document.getElementById('avatar-file-input').value = '';
+            document.getElementById('avatar-modal').classList.remove('hidden');
+        }
+
+        function closeAvatarModal() {
+            document.getElementById('avatar-modal').classList.add('hidden');
+        }
+
+        function previewAvatarFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempAvatarSelection = e.target.result;
+                    document.getElementById('avatar-preview-img').src = tempAvatarSelection;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function previewAvatarUrl(url) {
+            if (url.trim().length > 5) {
+                tempAvatarSelection = url.trim();
+                document.getElementById('avatar-preview-img').src = tempAvatarSelection;
+            }
+        }
+
+        function resetAvatarToDefault() {
+            tempAvatarSelection = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=400";
+            document.getElementById('avatar-preview-img').src = tempAvatarSelection;
+            document.getElementById('avatar-url-input').value = '';
+            document.getElementById('avatar-file-input').value = '';
+        }
+
+        function saveProfileAvatar() {
+            if (!loggedInUser || !tempAvatarSelection) return;
+
+            // Update student in state
+            loggedInUser.photo = tempAvatarSelection;
+
+            // Update master roster list
+            const idx = studentsData.findIndex(s => s.nis === loggedInUser.nis);
+            if (idx !== -1) {
+                studentsData[idx].photo = tempAvatarSelection;
+            }
+
+            // Update UI elements
+            document.getElementById('dash-user-avatar').src = tempAvatarSelection;
+            document.getElementById('dash-card-avatar').src = tempAvatarSelection;
+            renderStudents(studentsData);
+
+            closeAvatarModal();
+            updateNavState();
+        }
+
+        // Piket Admin Management
+        function openPiketAdminModal() {
+            if (!loggedInUser || !loggedInUser.isAdmin) return;
+
+            // Populate student dropdown
+            const select = document.getElementById('piket-add-student');
+            select.innerHTML = studentsData.map(s => `
+                <option value="${s.fullname}">${s.fullname}</option>
+            `).join('');
+
+            renderPiketAdminList();
+            document.getElementById('piket-admin-modal').classList.remove('hidden');
+        }
+
+        function closePiketAdminModal() {
+            document.getElementById('piket-admin-modal').classList.add('hidden');
+        }
+
+        function renderPiketAdminList() {
+            const list = document.getElementById('piket-admin-list');
+            let html = '';
+
+            scheduleData.forEach((dayGroup, dayIdx) => {
+                dayGroup.students.forEach((studentName, studentIdx) => {
+                    html += `
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-brand-orange bg-brand-warm px-2 py-0.5 rounded border border-brand-light">${dayGroup.day}</span>
+                                <span class="font-semibold text-brand-slate">${studentName}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <select onchange="changePiketDay(${dayIdx}, ${studentIdx}, this.value)" class="text-[11px] px-2 py-1 rounded border border-slate-200 bg-white">
+                                    <option value="Senin" ${dayGroup.day === 'Senin' ? 'selected' : ''}>Senin</option>
+                                    <option value="Selasa" ${dayGroup.day === 'Selasa' ? 'selected' : ''}>Selasa</option>
+                                    <option value="Rabu" ${dayGroup.day === 'Rabu' ? 'selected' : ''}>Rabu</option>
+                                    <option value="Kamis" ${dayGroup.day === 'Kamis' ? 'selected' : ''}>Kamis</option>
+                                    <option value="Jumat" ${dayGroup.day === 'Jumat' ? 'selected' : ''}>Jumat</option>
+                                </select>
+                                <button onclick="removeStudentFromPiket(${dayIdx}, ${studentIdx})" class="text-red-500 hover:text-red-700 p-1">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            list.innerHTML = html;
+        }
+
+        function addStudentToPiket() {
+            const studentName = document.getElementById('piket-add-student').value;
+            const targetDay = document.getElementById('piket-add-day').value;
+
+            const dayObj = scheduleData.find(d => d.day === targetDay);
+            if (dayObj) {
+                if (!dayObj.students.includes(studentName)) {
+                    dayObj.students.push(studentName);
+                    renderPiketSchedule();
+                    renderPiketAdminList();
+                }
+            }
+        }
+
+        function removeStudentFromPiket(dayIdx, studentIdx) {
+            scheduleData[dayIdx].students.splice(studentIdx, 1);
+            renderPiketSchedule();
+            renderPiketAdminList();
+        }
+
+        function changePiketDay(currentDayIdx, studentIdx, newDay) {
+            const studentName = scheduleData[currentDayIdx].students[studentIdx];
+            scheduleData[currentDayIdx].students.splice(studentIdx, 1);
+
+            const newDayObj = scheduleData.find(d => d.day === newDay);
+            if (newDayObj && !newDayObj.students.includes(studentName)) {
+                newDayObj.students.push(studentName);
+            }
+
+            renderPiketSchedule();
+            renderPiketAdminList();
+        }
+
+        // Navigation Bar state update
+        function updateNavState() {
+            const navAuth = document.getElementById('nav-auth-container');
+            if (loggedInUser) {
+                navAuth.innerHTML = `
+                    <button onclick="openDashboard(loggedInUser)" class="flex items-center gap-2 bg-brand-warm border border-brand-light text-brand-orange hover:bg-orange-100 px-4 py-2 rounded-full font-semibold text-xs transition-colors">
+                        <img src="${loggedInUser.photo}" class="w-6 h-6 rounded-full object-cover border border-brand-orange">
+                        <span>Portal (${loggedInUser.fullname.split(' ')[0]})</span>
+                    </button>
+                    <button onclick="logoutStudent()" class="text-xs text-red-500 font-semibold hover:underline">Keluar</button>
+                `;
+            } else {
+                navAuth.innerHTML = `
+                    <button onclick="openLoginModal()" class="flex items-center gap-2 bg-brand-orange hover:bg-brand-hover text-white px-5 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-brand-orange/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fas fa-sign-in-alt text-xs"></i>
+                        <span>Login Siswa</span>
+                    </button>
+                `;
+            }
+        }
+
+        // Mobile drawer and scroll handling
+        function setupNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('glass-nav', 'shadow-sm');
+                } else {
+                    navbar.classList.remove('glass-nav', 'shadow-sm');
+                }
+            });
+
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('translate-x-full');
+            }
+
+            if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
+            if (closeBtn) closeBtn.addEventListener('click', toggleMobileMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', toggleMobileMenu));
+        }
+    </script>
+</body>
+</html>
