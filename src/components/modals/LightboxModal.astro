@@ -1,0 +1,34 @@
+---
+// Lightbox Modal Component
+---
+
+<div id="lightbox-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+    <div class="relative max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-modal border border-slate-100 flex flex-col md:flex-row">
+        <button id="lightbox-close-btn" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/60 text-white flex items-center justify-center hover:bg-slate-900 transition-colors">
+            <i class="fas fa-times text-lg"></i>
+        </button>
+
+        <div class="md:w-3/5 bg-slate-900 flex items-center justify-center min-h-[300px] max-h-[500px] overflow-hidden">
+            <img id="lightbox-img" src="" alt="Gallery Preview" class="w-full h-full object-contain">
+        </div>
+
+        <div class="md:w-2/5 p-6 sm:p-8 flex flex-col justify-between bg-white">
+            <div>
+                <span id="lightbox-date" class="text-xs text-brand-orange font-bold uppercase tracking-wider inline-block mb-2">
+                    Date
+                </span>
+                <h3 id="lightbox-title" class="font-display font-bold text-2xl text-brand-slate mb-3">
+                    Title
+                </h3>
+                <p id="lightbox-desc" class="text-brand-muted text-sm leading-relaxed">
+                    Description
+                </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-400">
+                <span>Album Rayon Cisarua 3</span>
+                <button id="lightbox-close-text-btn" class="text-brand-orange font-semibold hover:underline">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>

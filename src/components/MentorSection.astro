@@ -1,0 +1,48 @@
+---
+import { mentorData } from '../data/siteData';
+---
+
+<section id="mentor" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                Sosok Pengasuh
+            </span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                Pembimbing Rayon Cisarua 3
+            </h2>
+            <p class="text-brand-muted mt-2">
+                Mengenal pendamping yang senantiasa membimbing dan mengarahkan kami menuju kebaikan.
+            </p>
+        </div>
+
+        <!-- Mentor Card -->
+        <div class="max-w-4xl mx-auto bg-gradient-to-r from-brand-warm/60 via-white to-orange-50/40 rounded-3xl p-8 sm:p-12 border border-brand-light shadow-soft">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-5 text-center">
+                    <div class="relative inline-block">
+                        <img src={mentorData.photo} alt={mentorData.name} class="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl object-cover border-4 border-white shadow-lg mx-auto">
+                        <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-brand-orange text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow">
+                            Pembimbing
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7 space-y-4 text-center md:text-left">
+                    <div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-brand-slate">{mentorData.name}</h3>
+                        <p class="text-brand-orange font-semibold text-sm mt-1">{mentorData.title}</p>
+                    </div>
+                    <p class="text-brand-muted text-sm sm:text-base leading-relaxed">{mentorData.bio}</p>
+                    <div class="p-4 rounded-2xl bg-white border border-brand-light shadow-sm relative">
+                        <i class="fas fa-quote-left text-brand-orange/20 text-3xl absolute top-3 left-3"></i>
+                        <p class="text-xs sm:text-sm text-brand-slate font-medium italic relative z-10 pl-6">
+                            "{mentorData.quote}"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

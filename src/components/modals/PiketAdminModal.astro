@@ -1,0 +1,51 @@
+---
+// Piket Admin Management Modal
+---
+
+<div id="piket-admin-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+    <div class="relative max-w-2xl w-full bg-white rounded-3xl shadow-modal border border-slate-100 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+        <button id="piket-admin-close-btn" class="absolute top-5 right-5 text-slate-400 hover:text-brand-slate p-2">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <div class="mb-6">
+            <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider inline-block mb-1">Panel Admin Rayon</span>
+            <h3 class="font-display font-bold text-2xl text-brand-slate">Kelola Jadwal Piket</h3>
+            <p class="text-xs text-brand-muted mt-1">Atur penugasan piket siswa untuk setiap hari kerja.</p>
+        </div>
+
+        <!-- Add Duty Form -->
+        <div class="bg-brand-warm/60 border border-brand-light p-4 rounded-2xl mb-6 space-y-3">
+            <h4 class="font-display font-bold text-xs text-brand-slate uppercase tracking-wider">Tambah Tugas Piket</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <select id="piket-add-student" class="px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-brand-slate">
+                    <!-- Populated dynamically -->
+                </select>
+                <select id="piket-add-day" class="px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-brand-slate">
+                    <option value="Senin">Senin</option>
+                    <option value="Selasa">Selasa</option>
+                    <option value="Rabu">Rabu</option>
+                    <option value="Kamis">Kamis</option>
+                    <option value="Jumat">Jumat</option>
+                </select>
+                <button id="piket-add-btn" class="bg-brand-orange hover:bg-brand-hover text-white text-xs font-semibold py-2 rounded-xl shadow transition-all">
+                    + Tambahkan Siswa
+                </button>
+            </div>
+        </div>
+
+        <!-- Current Schedule Management List -->
+        <div class="space-y-4">
+            <h4 class="font-display font-bold text-sm text-brand-slate">Daftar Penugasan Saat Ini:</h4>
+            <div id="piket-admin-list" class="space-y-2">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-100 text-right">
+            <button id="piket-admin-done-btn" class="bg-brand-slate text-white px-5 py-2 rounded-xl text-xs font-semibold hover:bg-slate-800">
+                Selesai &amp; Tutup
+            </button>
+        </div>
+    </div>
+</div>

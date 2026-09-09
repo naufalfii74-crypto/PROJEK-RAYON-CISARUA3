@@ -1,0 +1,59 @@
+---
+import { scheduleData } from '../data/siteData';
+---
+
+<section id="piket" class="py-20 bg-brand-bg relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <span class="text-brand-orange font-bold uppercase tracking-wider text-xs bg-brand-warm px-3.5 py-1.5 rounded-full border border-brand-light">
+                    Kedisiplinan Kebersihan
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-slate mt-3">
+                    Jadwal Piket Rayon
+                </h2>
+                <p class="text-brand-muted mt-1 text-sm sm:text-base">
+                    Daftar penugasan kebersihan dan ketertiban harian anggota Rayon Cisarua 3.
+                </p>
+            </div>
+
+            <!-- Admin Duty Control Button -->
+            <div id="piket-admin-controls" class="hidden">
+                <button id="piket-admin-open-btn" class="bg-brand-orange hover:bg-brand-hover text-white px-5 py-2.5 rounded-xl font-semibold text-xs shadow-md flex items-center gap-2">
+                    <i class="fas fa-edit"></i>
+                    <span>Kelola Jadwal Piket (Admin)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Duty Schedule Table / Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="piket-schedule-container">
+            {scheduleData.map((item) => (
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                            <h4 class="font-display font-bold text-base text-brand-slate flex items-center gap-2">
+                                <i class="far fa-calendar-check text-brand-orange text-sm"></i>
+                                {item.day}
+                            </h4>
+                            <span class="text-[10px] font-bold bg-brand-warm text-brand-orange px-2 py-0.5 rounded-full border border-brand-light">
+                                {item.students.length} Siswa
+                            </span>
+                        </div>
+                        <ul class="space-y-2">
+                            {item.students.map((name) => (
+                                <li class="text-xs font-medium text-brand-slate flex items-center gap-2 py-1 px-2 rounded-lg bg-slate-50">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                                    <span>{name}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <p class="text-[10px] text-brand-muted mt-4 text-right italic">Piket Kebersihan</p>
+                </div>
+            ))}
+        </div>
+
+    </div>
+</section>

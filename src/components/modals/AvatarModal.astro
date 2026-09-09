@@ -1,0 +1,50 @@
+---
+// Edit Avatar Modal Component
+---
+
+<div id="avatar-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+    <div class="relative max-w-md w-full bg-white rounded-3xl shadow-modal border border-slate-100 p-6 sm:p-8">
+        <button id="avatar-close-btn" class="absolute top-5 right-5 text-slate-400 hover:text-brand-slate p-2">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <h3 class="font-display font-bold text-xl text-brand-slate mb-2">Ubah Foto Profil</h3>
+        <p class="text-xs text-brand-muted mb-6">Pilih foto dari perangkat Anda atau masukkan URL gambar baru.</p>
+
+        <!-- Image Preview Box -->
+        <div class="text-center mb-6">
+            <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-brand-warm mx-auto shadow-md mb-2 bg-slate-100">
+                <img id="avatar-preview-img" src="" alt="Preview Avatar" class="w-full h-full object-cover">
+            </div>
+            <span class="text-[11px] text-slate-400">Pratinjau Foto Profil</span>
+        </div>
+
+        <!-- Upload Methods -->
+        <div class="space-y-4 mb-6">
+            <div>
+                <label class="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1">Unggah dari Perangkat</label>
+                <input type="file" id="avatar-file-input" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-warm file:text-brand-orange hover:file:bg-orange-100 cursor-pointer">
+            </div>
+
+            <div class="relative flex py-1 items-center">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="flex-shrink mx-2 text-[10px] text-slate-400 uppercase font-bold">atau URL Gambar</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <div>
+                <input type="url" id="avatar-url-input" placeholder="https://example.com/photo.jpg" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-orange">
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-2">
+            <button id="avatar-reset-btn" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition-colors">
+                Hapus / Reset
+            </button>
+            <button id="avatar-save-btn" class="flex-grow bg-brand-orange hover:bg-brand-hover text-white py-2.5 rounded-xl font-semibold text-xs shadow-md transition-all">
+                Simpan Foto Profil
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import MentorSection from '../components/MentorSection.astro';
+import PiketSection from '../components/PiketSection.astro';
+import StudentsSection from '../components/StudentsSection.astro';
+import GallerySection from '../components/GallerySection.astro';
+import AchievementsSection from '../components/AchievementsSection.astro';
+import Footer from '../components/Footer.astro';
+
+import LightboxModal from '../components/modals/LightboxModal.astro';
+import LoginModal from '../components/modals/LoginModal.astro';
+import DashboardModal from '../components/modals/DashboardModal.astro';
+import AvatarModal from '../components/modals/AvatarModal.astro';
+import PiketAdminModal from '../components/modals/PiketAdminModal.astro';
+---
+
+<BaseLayout>
+  <Header />
+  <HeroSection />
+  <AboutSection />
+  <MentorSection />
+  <PiketSection />
+  <StudentsSection />
+  <GallerySection />
+  <AchievementsSection />
+  <Footer />
+
+  <!-- Modals -->
+  <LightboxModal />
+  <LoginModal />
+  <DashboardModal />
+  <AvatarModal />
+  <PiketAdminModal />
+
+  <!-- Client-side App Logic -->
+  <script src="../scripts/app.js"></script>
+</BaseLayout>
