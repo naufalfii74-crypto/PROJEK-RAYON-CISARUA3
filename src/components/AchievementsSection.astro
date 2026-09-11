@@ -19,22 +19,34 @@ import { achievementsData } from '../data/siteData';
 
         <!-- Achievements Grid -->
         <div id="achievements-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {achievementsData.map((item) => (
-                <div class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-hover-lift transition-all duration-300 flex flex-col">
-                    <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src={item.image} alt={item.title} class="w-full h-full object-cover" loading="lazy">
-                        <div class="absolute top-3 right-3 bg-brand-orange text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
-                            <i class="fas fa-trophy mr-1"></i> Prestasi
+            {achievementsData.length > 0 ? (
+                achievementsData.map((item) => (
+                    <div class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-hover-lift transition-all duration-300 flex flex-col">
+                        <div class="h-48 overflow-hidden bg-slate-100 relative">
+                            <img src={item.image} alt={item.title} class="w-full h-full object-cover" loading="lazy">
+                            <div class="absolute top-3 right-3 bg-brand-orange text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                                <i class="fas fa-trophy mr-1"></i> Prestasi
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-display font-bold text-lg text-brand-slate mb-2">{item.title}</h4>
+                                <p class="text-xs text-brand-muted leading-relaxed">{item.description}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-display font-bold text-lg text-brand-slate mb-2">{item.title}</h4>
-                            <p class="text-xs text-brand-muted leading-relaxed">{item.description}</p>
-                        </div>
+                ))
+            ) : (
+                <div class="col-span-full text-center py-16 px-6 bg-brand-warm/30 rounded-3xl border border-brand-light max-w-xl mx-auto">
+                    <div class="w-16 h-16 bg-orange-100 text-brand-orange rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm">
+                        <i class="fas fa-award"></i>
                     </div>
+                    <h3 class="font-display font-bold text-lg text-brand-slate">Belum Ada Catatan Prestasi</h3>
+                    <p class="text-brand-muted text-sm mt-1 leading-relaxed">
+                        Daftar kejuaraan dan capaian prestasi anggota Rayon Cisarua 3 akan segera diperbarui di sini saat kompetisi mendatang dimulai.
+                    </p>
                 </div>
-            ))}
+            )}
         </div>
 
     </div>

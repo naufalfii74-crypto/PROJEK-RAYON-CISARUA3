@@ -500,9 +500,11 @@
                     </div>
 
                     <select id="student-role-filter" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-brand-slate bg-white focus:outline-none focus:border-brand-orange transition-all cursor-pointer">
-                        <option value="ALL">Semua Peran</option>
+                        <option value="ALL">Semua Peran & Angkatan</option>
                         <option value="Pengurus">Pengurus Rayon</option>
                         <option value="Anggota">Anggota Siswa</option>
+                        <option value="30">Angkatan 30</option>
+                        <option value="31">Angkatan 31</option>
                     </select>
                 </div>
             </div>
@@ -682,14 +684,24 @@
 
             <div class="mt-6 pt-4 border-t border-slate-100 text-center space-y-2">
                 <p class="text-[11px] text-slate-400">Pilih Akun Uji Coba Cepat:</p>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <button onclick="fillDemoAccount('Moch Luthfy Naufal', '12511074')" class="text-[11px] font-semibold text-brand-orange bg-brand-warm hover:bg-orange-100 px-2.5 py-1 rounded-lg transition-colors">
-                        <i class="fas fa-user-shield mr-1"></i> Admin: Moch Luthfy
+                <div class="flex flex-wrap gap-1.5 justify-center">
+                    <button onclick="fillDemoAccount('Moch Luthfy Naufal', '12511074')" class="text-[10px] font-semibold text-brand-orange bg-brand-warm hover:bg-orange-100 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user-shield mr-1"></i> Moch Luthfy
                     </button>
-                    <button onclick="fillDemoAccount('Siti Rahma Azzahra', '12511085')" class="text-[11px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors">
-                        <i class="fas fa-user mr-1"></i> Siswa: Siti Rahma
+                    <button onclick="fillDemoAccount('Muhamad Azwan Muzaki', '12511094')" class="text-[10px] font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user-shield mr-1"></i> M. Azwan
+                    </button>
+                    <button onclick="fillDemoAccount('Haphinatul Shafira', '12510978')" class="text-[10px] font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user mr-1"></i> Haphinatul
+                    </button>
+                    <button onclick="fillDemoAccount('Al\'fika Dwi Cahyani', '12510816')" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user mr-1"></i> Al'fika
+                    </button>
+                    <button onclick="fillDemoAccount('Rizky Ikhsan Maulana', '12611961')" class="text-[10px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors">
+                        <i class="fas fa-user mr-1"></i> Rizky Ikhsan
                     </button>
                 </div>
+                <p class="text-[10px] text-slate-400 mt-1 italic">Atau klik langsung "Login Sebagai Siswa" pada kartu anggota.</p>
             </div>
         </div>
     </div>
@@ -781,6 +793,10 @@
                             <div class="flex justify-between items-center py-1 border-t border-slate-50">
                                 <span class="text-brand-muted">Kelas / Major</span>
                                 <span id="dash-card-major" class="font-bold text-brand-slate">PPLG</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-t border-slate-50">
+                                <span class="text-brand-muted">Angkatan</span>
+                                <span id="dash-card-angkatan" class="font-bold text-brand-slate">Angkatan 30</span>
                             </div>
                             <div class="flex justify-between items-center py-1 border-t border-slate-50">
                                 <span class="text-brand-muted">Rayon</span>
@@ -972,6 +988,7 @@
                 nis: "12511074",
                 fullname: "Moch Luthfy Naufal",
                 role: "Ketua Rayon",
+                angkatan: "30",
                 isOfficer: true,
                 isAdmin: true, // Rayon Administrator privileges
                 major: "PPLG (Pengembangan Perangkat Lunak)",
@@ -982,94 +999,101 @@
                 ]
             },
             {
-                nis: "12511085",
-                fullname: "Siti Rahma Azzahra",
-                role: "Wakil Ketua Rayon",
+                nis: "12510978",
+                fullname: "Haphinatul Shafira",
+                role: "Sekretaris",
+                angkatan: "30",
                 isOfficer: true,
-                isAdmin: false,
-                major: "TJKT (Teknik Jaringan Komputer)",
-                photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
-                achievements: [
-                    { title: "Juara 2 Cisco Network Challenge", level: "Tingkat Provinsi", date: "Juni 2026" }
-                ]
-            },
-            {
-                nis: "12511092",
-                fullname: "Ahmad Fauzi",
-                role: "Sekretaris Rayon",
-                isOfficer: true,
-                isAdmin: false,
-                major: "PPLG",
-                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-                achievements: [
-                    { title: "Best UI/UX Design Hackathon 2026", level: "Tingkat Kota", date: "April 2026" }
-                ]
-            },
-            {
-                nis: "12511101",
-                fullname: "Dewi Lestari",
-                role: "Bendahara Rayon",
-                isOfficer: true,
-                isAdmin: false,
+                isAdmin: true,
                 major: "DKV (Desain Komunikasi Visual)",
-                photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
+                photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
                 achievements: [
                     { title: "Juara 1 Poster Design Edukasi", level: "Tingkat Nasional", date: "Maret 2026" }
                 ]
             },
             {
-                nis: "12511115",
-                fullname: "Rizky Pratama",
-                role: "Divisi Kedisiplinan",
+                nis: "12510816",
+                fullname: "Al'fika Dwi Cahyani",
+                role: "Bendahara",
+                angkatan: "30",
                 isOfficer: true,
-                isAdmin: false,
-                major: "TJKT",
-                photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                isAdmin: true,
+                major: "MPLB (Management Perkantoran Layanan Bisnis)",
+                photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
                 achievements: [
-                    { title: "Siswa Terdisiplin Pekan Kebiasaan Baik", level: "Tingkat Sekolah", date: "Agustus 2026" }
+                    { title: "Siswa Berprestasi Tata Kelola Administrasi", level: "Tingkat Sekolah", date: "Juni 2026" }
                 ]
             },
             {
-                nis: "12511123",
-                fullname: "Anisa Putri",
-                role: "Divisi Kebersihan",
-                isOfficer: true,
+                nis: "12611961",
+                fullname: "Rizky Ikhsan Maulana",
+                role: "Anggota",
+                angkatan: "31",
+                isOfficer: false,
                 isAdmin: false,
-                major: "MPLB (Manajemen Perkantoran)",
-                photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400",
+                major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
+                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Peserta Orientasi Kepemimpinan Siswa", level: "Tingkat Sekolah", date: "Agustus 2026" }
+                ]
+            },
+            {
+                nis: "12611861",
+                fullname: "Mustafa Habibi Agnia",
+                role: "Anggota",
+                angkatan: "31",
+                isOfficer: false,
+                isAdmin: false,
+                major: "PMN",
+                photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
                 achievements: []
             },
             {
-                nis: "12511130",
-                fullname: "Bagas Setiawan",
+                nis: "12611831",
+                fullname: "Muhammad Naufal Alkahfi",
                 role: "Anggota",
+                angkatan: "31",
                 isOfficer: false,
                 isAdmin: false,
-                major: "PPLG",
-                photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=400",
+                major: "PPLG (Pengembangan Perangkat Lunak)",
+                photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
                 achievements: [
-                    { title: "Peserta Logic Programming Olympiad", level: "Tingkat Nasional", date: "Februari 2026" }
+                    { title: "Peserta Logic Programming Olympiad", level: "Tingkat Sekolah", date: "Februari 2026" }
                 ]
             },
             {
-                nis: "12511142",
-                fullname: "Nabila Zahra",
+                nis: "12511094",
+                fullname: "Muhamad Azwan Muzaki",
+                role: "Ketua Rayon",
+                angkatan: "30",
+                isOfficer: true,
+                isAdmin: true,
+                major: "TJKT",
+                photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                achievements: [
+                    { title: "Juara 2 Cisco Network Challenge", level: "Tingkat Provinsi", date: "Juni 2026" }
+                ]
+            },
+            {
+                nis: "12510875",
+                fullname: "Bagas Dizwar Asfas",
                 role: "Anggota",
+                angkatan: "30",
                 isOfficer: false,
                 isAdmin: false,
-                major: "KLN (Kuliner)",
-                photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=400",
+                major: "PPLG (Pengembangan Perangkat Lunak)",
+                photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=400",
                 achievements: []
             }
         ];
 
         // Duty Schedule Data (Jadwal Piket)
         let scheduleData = [
-            { day: "Senin", students: ["Moch Luthfy Naufal", "Siti Rahma Azzahra"] },
-            { day: "Selasa", students: ["Ahmad Fauzi", "Dewi Lestari"] },
-            { day: "Rabu", students: ["Rizky Pratama", "Anisa Putri"] },
-            { day: "Kamis", students: ["Bagas Setiawan", "Nabila Zahra"] },
-            { day: "Jumat", students: ["Moch Luthfy Naufal", "Rizky Pratama", "Ahmad Fauzi"] }
+            { day: "Senin", students: ["Moch Luthfy Naufal", "Haphinatul Shafira"] },
+            { day: "Selasa", students: ["Muhamad Azwan Muzaki", "Al'fika Dwi Cahyani"] },
+            { day: "Rabu", students: ["Rizky Ikhsan Maulana", "Bagas Dizwar Asfas"] },
+            { day: "Kamis", students: ["Mustafa Habibi Agnia", "Muhammad Naufal Alkahfi"] },
+            { day: "Jumat", students: ["Moch Luthfy Naufal", "Muhamad Azwan Muzaki", "Rizky Ikhsan Maulana"] }
         ];
 
         // Moments Activity Gallery (Simplified - Photo Centric)
@@ -1259,9 +1283,16 @@
                             </div>
                         </div>
                         <div class="space-y-1.5 mb-4">
-                            <span class="inline-block text-[11px] font-semibold ${student.isOfficer ? 'bg-brand-warm text-brand-orange border border-brand-light' : 'bg-slate-100 text-slate-600'} px-2.5 py-0.5 rounded-full">
-                                ${student.role}
-                            </span>
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="inline-block text-[11px] font-semibold ${student.isOfficer ? 'bg-brand-warm text-brand-orange border border-brand-light' : 'bg-slate-100 text-slate-600'} px-2.5 py-0.5 rounded-full">
+                                    ${student.role}
+                                </span>
+                                ${student.angkatan ? `
+                                    <span class="inline-block text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full border border-slate-200">
+                                        Angkatan ${student.angkatan}
+                                    </span>
+                                ` : ''}
+                            </div>
                             <p class="text-xs text-brand-muted font-medium truncate">${student.major}</p>
                         </div>
                     </div>
@@ -1284,7 +1315,10 @@
                 const filtered = studentsData.filter(student => {
                     const matchesQuery = student.fullname.toLowerCase().includes(query) || student.nis.includes(query);
                     const matchesRole = role === 'ALL' ? true : 
-                        role === 'Pengurus' ? student.isOfficer : !student.isOfficer;
+                        role === 'Pengurus' ? student.isOfficer :
+                        role === 'Anggota' ? !student.isOfficer :
+                        role === '30' ? student.angkatan === '30' :
+                        role === '31' ? student.angkatan === '31' : true;
 
                     return matchesQuery && matchesRole;
                 });
@@ -1386,9 +1420,13 @@
             const fullnameInput = document.getElementById('login-fullname').value.trim();
             const nisInput = document.getElementById('login-nis').value.trim();
 
-            const student = studentsData.find(s => 
-                s.fullname.toLowerCase() === fullnameInput.toLowerCase() && s.nis === nisInput
-            );
+            const normalize = (str) => (str || '').toLowerCase().replace(/['’`\s]/g, '');
+
+            const student = studentsData.find(s => {
+                const matchNis = s.nis === nisInput;
+                const matchName = normalize(s.fullname) === normalize(fullnameInput) || s.nis === fullnameInput;
+                return matchNis && matchName;
+            });
 
             if (student) {
                 loggedInUser = student;
@@ -1412,6 +1450,11 @@
             document.getElementById('dash-card-role').textContent = student.role;
             document.getElementById('dash-card-nis').textContent = student.nis;
             document.getElementById('dash-card-major').textContent = student.major;
+
+            const dashAngkatan = document.getElementById('dash-card-angkatan');
+            if (dashAngkatan) {
+                dashAngkatan.textContent = student.angkatan ? `Angkatan ${student.angkatan}` : '-';
+            }
 
             // Admin badge trigger
             const adminBadge = document.getElementById('dash-card-admin-badge');

@@ -11,116 +11,260 @@ const studentsData = [
   {
     nis: "12511074",
     fullname: "Moch Luthfy Naufal",
-    role: "Ketua Rayon",
+    role: "Anggota",
+    angkatan: "30",
     isOfficer: true,
     isAdmin: true,
     major: "PPLG (Pengembangan Perangkat Lunak)",
-    photo: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400",
-    achievements: [
-      { title: "Juara 1 Web Development Competition", level: "Tingkat Kota", date: "Juli 2026" },
-      { title: "Sertifikasi Junior Software Engineer", level: "Nasional", date: "Mei 2026" }
-    ]
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12511094",
+    fullname: "Muhamad Azwan Muzaki",
+    role: "Ketua Rayon",
+    angkatan: "30",
+    isOfficer: true,
+    isAdmin: true,
+    major: "TJKT (Teknik Jaringan Komputer dan Telekomunikasi)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12510978",
+    fullname: "Haphinatul Shafira",
+    role: "Sekretaris",
+    angkatan: "30",
+    isOfficer: true,
+    isAdmin: true,
+    major: "DKV (Desain Komunikasi Visual)",
+    photo: "",
+    achievements: []
   },
   {
     nis: "12510816",
     fullname: "Al'fika Dwi Cahyani",
     role: "Bendahara",
-    isOfficer: true,
+    angkatan: "30",
+    isOfficer: false,
     isAdmin: false,
-    major: "MPLB (Management Perkantoran Dan Layanan Bisnis",
-    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
-    achievements: [
-      {}
-    ]
-  },
-  {
-    nis: "12511092",
-    fullname: "Ahmad Fauzi",
-    role: "Sekretaris Rayon",
-    isOfficer: true,
-    isAdmin: false,
-    major: "PPLG",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-    achievements: [
-      { title: "Best UI/UX Design Hackathon 2026", level: "Tingkat Kota", date: "April 2026" }
-    ]
-  },
-  {
-    nis: "12511101",
-    fullname: "Dewi Lestari",
-    role: "Bendahara Rayon",
-    isOfficer: true,
-    isAdmin: false,
-    major: "DKV (Desain Komunikasi Visual)",
-    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
-    achievements: [
-      { title: "Juara 1 Poster Design Edukasi", level: "Tingkat Nasional", date: "Maret 2026" }
-    ]
-  },
-  {
-    nis: "12511115",
-    fullname: "Rizky Pratama",
-    role: "Divisi Kedisiplinan",
-    isOfficer: true,
-    isAdmin: false,
-    major: "TJKT",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
-    achievements: [
-      { title: "Siswa Terdisiplin Pekan Kebiasaan Baik", level: "Tingkat Sekolah", date: "Agustus 2026" }
-    ]
-  },
-  {
-    nis: "12511123",
-    fullname: "Anisa Putri",
-    role: "Divisi Kebersihan",
-    isOfficer: true,
-    isAdmin: false,
-    major: "MPLB (Manajemen Perkantoran)",
-    photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400",
+    major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
+    photo: "",
     achievements: []
   },
   {
-    nis: "12511130",
-    fullname: "Bagas Setiawan",
+    nis: "12510875",
+    fullname: "Bagas Dizwar Asfas",
     role: "Anggota",
+    angkatan: "30",
     isOfficer: false,
     isAdmin: false,
-    major: "PPLG",
-    photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=400",
-    achievements: [
-      { title: "Peserta Logic Programming Olympiad", level: "Tingkat Nasional", date: "Februari 2026" }
-    ]
+    major: "PPLG (Pengembangan Perangkat Lunak)",
+    photo: "",
+    achievements: []
   },
   {
-    nis: "12511142",
-    fullname: "Nabila Zahra",
-    role: "Anggota",
+    nis: "12511415",
+    fullname: "Zaghita Rahmah Firdaus",
+    role: "Wakil Ketua",
+    angkatan: "30",
     isOfficer: false,
     isAdmin: false,
     major: "KLN (Kuliner)",
-    photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=400",
+    photo: "",
     achievements: []
-  }
+  },
+  {
+    nis: "12511365",
+    fullname: "Siti Aliya Zhafirah",
+    role: "Anggota",
+    angkatan: "30",
+    isOfficer: false,
+    isAdmin: false,
+    major: "PMN (Pemasaran)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "",
+    fullname: "",
+    role: "",
+    angkatan: "",
+    isOfficer: false,
+    isAdmin: false,
+    major: "",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611961",
+    fullname: "Rizky Ikhsan Maulana",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611861",
+    fullname: "Mustafa Habibi Agnia",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "PMN (Pemasaran)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611831",
+    fullname: "Muhammad Naufal Alkahfi",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "PPLG (Pengembangan Perangkat Lunak)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12612043",
+    fullname: "Viona Oktora Mulyana Putri",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "HTL (Perhotelan)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611539",
+    fullname: "Chieka Sharlie Wulandari",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "KLN (Kuliner)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611612",
+    fullname: "Ferhika Putri Maulidina",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "PMN (Pemasaran)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611994",
+    fullname: "Siti Erfina Nurmawati",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611468",
+    fullname: "Alisya Zahwa Nurlatifah",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "PPLG (Pengembangan Perangkat Lunak)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611807",
+    fullname: "Muhammad Faris Hisyam Azizi",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "HTL (Perhotelan)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611795",
+    fullname: "Muhammad Asrul Gunawan",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "TJKT (Teknik Jaringan Komputer dan Telekomunikasi)",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "12611549",
+    fullname: "Danisha Aniq Ayasha Firgiansa",
+    role: "Anggota",
+    angkatan: "31",
+    isOfficer: false,
+    isAdmin: false,
+    major: "TJKT (Teknik Jaringan Komputer dan Telekomunikasi)",
+    photo: "",
+    achievements: [
+      { title: "Lomba Silat Tingkat Sekolah", level: "Sekolah", date: "2023" },
+      { title: "Lomba Tolak Peluru Mendapatkan Perunggu", level: "Kabupaten", date: "2025" },
+      { title: "Lomba Karate", level: "Kabupaten", date: "2019" },
+      { title: "Lomba Karate", level: "Kabupaten", date: "2019" },
+      { title: "Lomba Karate", level: "Kelas", date: "2022" }
+    ]
+  },
+  {
+    nis: "",
+    fullname: "",
+    role: "",
+    angkatan: "",
+    isOfficer: false,
+    isAdmin: false,
+    major: "",
+    photo: "",
+    achievements: []
+  },
+  {
+    nis: "",
+    fullname: "",
+    role: "",
+    angkatan: "",
+    isOfficer: false,
+    isAdmin: false,
+    major: "",
+    photo: "",
+    achievements: []
+  },
 ];
 
 const scheduleData = [
-  { day: "Senin", students: ["Moch Luthfy Naufal", "Siti Rahma Azzahra"] },
-  { day: "Selasa", students: ["Ahmad Fauzi", "Dewi Lestari"] },
-  { day: "Rabu", students: ["Rizky Pratama", "Anisa Putri"] },
-  { day: "Kamis", students: ["Bagas Setiawan", "Nabila Zahra"] },
-  { day: "Jumat", students: ["Moch Luthfy Naufal", "Rizky Pratama", "Ahmad Fauzi"] }
+  { day: "Senin", students: ["Chieka Sharlie Wulandari", "Daniel Kurniawan", "M Zafa Zulprana", "Muhammad Asrul Gunawan", "Nadira Dewanti Putri", "Moch Luthfy Naufal", "Syifa Dwi Anggraini", "Zaghita Rahmah Firdaus"] },
+  { day: "Selasa", students: ["Al'Fika Dwi Cahyani", "Fadlan Ahmad Jamil Al Ayubi", "Haphinatul Shafira", "Muhamad Aditya Abdilah", "Muhamad Azwan Muzaki", "Muhamad Fedliansyah Ilham", "Salsabila Destiana Putri"] },
+  { day: "Rabu", students: ["Dervy Alita Wijaya", "Muhammad Naufal Alkahfi", "Sifa Aulia", "Fadliansyah Venanda", "Muhamad Fadilah", "Ridwan Faiz Rojabi", "Siti Aliya Zhafirah"] },
+  { day: "Kamis", students: ["Adhwa Baihaqi", "Danisha Aniq Ayasha Firgiansa", "Ferhika Putri Maulidina", "Muhammad Faris Hisyam Azizi", "Mustafa Habibi Agnia", "Rizky Ikhsan Maulana", "Viona Oktora Mulyana Putri"] },
+  { day: "Jumat", students: ["Alisya Zahwa Nurlatifah", "Dinda Aqila Nurfadilah", "Siti Erfina Nurmawati", "Bagas Dizwar Asfas", "Muhammad Rafliansyah Putra", "Sandy Prayogo", "Zyad Abdillah"] }
 ];
 
 const announcementsData = [
   {
-    title: "Pemeriksaan Kebiasaan Baik & Kerapihan",
-    date: "Sabtu, 22 Agustus 2026",
-    content: "Diimbau seluruh anggota Rayon Cisarua 3 berkumpul di Aula Rayon tepat pukul 08:00 WIB membawa buku jurnal."
+    title: "",
+    date: "",
+    content: "ASCENDING"
   },
   {
-    title: "Evaluasi Piket Harian Minggu Ini",
-    date: "Rabu, 26 Agustus 2026",
-    content: "Seluruh petugas piket diharapkan menjalankan tugas tepat waktu setelah jam pelajaran terakhir."
+    title: "t",
+    date: "d",
+    content: "c"
   }
 ];
 

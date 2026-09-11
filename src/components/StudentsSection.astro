@@ -26,9 +26,11 @@ import { studentsData } from '../data/siteData';
                 </div>
 
                 <select id="student-role-filter" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-brand-slate bg-white focus:outline-none focus:border-brand-orange transition-all cursor-pointer">
-                    <option value="ALL">Semua Peran</option>
+                    <option value="ALL">Semua Peran & Angkatan</option>
                     <option value="Pengurus">Pengurus Rayon</option>
                     <option value="Anggota">Anggota Siswa</option>
+                    <option value="30">Angkatan 30</option>
+                    <option value="31">Angkatan 31</option>
                 </select>
             </div>
         </div>
@@ -36,26 +38,27 @@ import { studentsData } from '../data/siteData';
         <!-- Student Grid -->
         <div id="students-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {studentsData.map((student) => (
-                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft hover:shadow-hover-lift hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-student-card data-fullname={student.fullname} data-nis={student.nis} data-officer={student.isOfficer.toString()}>
-                    <div>
-                        <div class="flex items-center gap-4 mb-4">
-                            <img src={student.photo} alt={student.fullname} class="w-14 h-14 rounded-full object-cover border-2 border-brand-warm shadow-sm flex-shrink-0">
-                            <div class="overflow-hidden">
-                                <h4 class="font-display font-bold text-base text-brand-slate truncate">{student.fullname}</h4>
-                                <span class="text-xs font-mono font-medium text-brand-muted">NIS: {student.nis}</span>
-                            </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft hover:shadow-hover-lift hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer" data-student-card data-fullname={student.fullname} data-nis={student.nis} data-officer={student.isOfficer.toString()} data-angkatan={student.angkatan || ''}>
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src={student.photo} alt={student.fullname} class="w-14 h-14 rounded-full object-cover border-2 border-brand-warm shadow-sm flex-shrink-0">
+                        <div class="overflow-hidden">
+                            <h4 class="font-display font-bold text-base text-brand-slate truncate">{student.fullname}</h4>
+                            <span class="text-xs font-mono font-medium text-brand-muted">NIS: {student.nis}</span>
                         </div>
-                        <div class="space-y-1.5 mb-4">
+                    </div>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-1.5 flex-wrap">
                             <span class={`inline-block text-[11px] font-semibold ${student.isOfficer ? 'bg-brand-warm text-brand-orange border border-brand-light' : 'bg-slate-100 text-slate-600'} px-2.5 py-0.5 rounded-full`}>
                                 {student.role}
                             </span>
-                            <p class="text-xs text-brand-muted font-medium truncate">{student.major}</p>
+                            {student.angkatan && (
+                                <span class="inline-block text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full border border-slate-200">
+                                    Angkatan {student.angkatan}
+                                </span>
+                            )}
                         </div>
+                        <p class="text-xs text-brand-muted font-medium truncate">{student.major}</p>
                     </div>
-                    <button class="quick-login-btn w-full text-center py-2 text-xs font-semibold text-brand-orange bg-brand-warm hover:bg-brand-orange hover:text-white rounded-xl transition-colors flex items-center justify-center gap-1.5" data-fullname={student.fullname} data-nis={student.nis}>
-                        <i class="fas fa-user-circle"></i>
-                        <span>Login Sebagai Siswa</span>
-                    </button>
                 </div>
             ))}
         </div>

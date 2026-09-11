@@ -13,12 +13,12 @@
                 <i class="fas fa-user-lock"></i>
             </div>
             <h3 class="font-display font-bold text-2xl text-brand-slate">Portal Login Siswa</h3>
-            <p class="text-xs text-brand-muted mt-1">Masukkan Nama Lengkap dan NIS Anda untuk mengakses profil.</p>
+            <p class="text-xs text-brand-muted mt-1">Gunakan <strong>Nama Lengkap</strong> dan <strong>NIS Anda sebagai Password</strong> untuk mengakses portal.</p>
         </div>
 
         <div id="login-error-msg" class="hidden mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
             <i class="fas fa-exclamation-circle text-sm flex-shrink-0"></i>
-            <span id="login-error-text">Nama atau NIS tidak ditemukan!</span>
+            <span id="login-error-text">Nama atau Password (NIS) tidak cocok! Pastikan nama sesuai data siswa.</span>
         </div>
 
         <form id="login-form" class="space-y-4">
@@ -31,7 +31,7 @@
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1.5">Password / NIS</label>
+                <label class="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1.5">Password / NIS Siswa</label>
                 <div class="relative">
                     <i class="fas fa-key absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     <input type="password" id="login-nis" required placeholder="Contoh: 12511074" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20">
@@ -43,17 +43,5 @@
                 <i class="fas fa-arrow-right text-xs"></i>
             </button>
         </form>
-
-        <div class="mt-6 pt-4 border-t border-slate-100 text-center space-y-2">
-            <p class="text-[11px] text-slate-400">Pilih Akun Uji Coba Cepat:</p>
-            <div class="flex flex-wrap gap-2 justify-center">
-                <button class="demo-fill-btn text-[11px] font-semibold text-brand-orange bg-brand-warm hover:bg-orange-100 px-2.5 py-1 rounded-lg transition-colors" data-fullname="Moch Luthfy Naufal" data-nis="12511074">
-                    <i class="fas fa-user-shield mr-1"></i> Admin: Moch Luthfy
-                </button>
-                <button class="demo-fill-btn text-[11px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors" data-fullname="Siti Rahma Azzahra" data-nis="12511085">
-                    <i class="fas fa-user mr-1"></i> Siswa: Siti Rahma
-                </button>
-            </div>
-        </div>
     </div>
 </div>
