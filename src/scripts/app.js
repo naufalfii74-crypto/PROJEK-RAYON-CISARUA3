@@ -46,7 +46,7 @@ const studentsData = [
     fullname: "Al'fika Dwi Cahyani",
     role: "Bendahara",
     angkatan: "30",
-    isOfficer: false,
+    isOfficer: true,
     isAdmin: false,
     major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
     photo: "",
@@ -57,8 +57,8 @@ const studentsData = [
     fullname: "Bagas Dizwar Asfas",
     role: "Anggota",
     angkatan: "30",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "PPLG (Pengembangan Perangkat Lunak)",
     photo: "",
     achievements: []
@@ -68,8 +68,8 @@ const studentsData = [
     fullname: "Zaghita Rahmah Firdaus",
     role: "Wakil Ketua",
     angkatan: "30",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "KLN (Kuliner)",
     photo: "",
     achievements: []
@@ -79,8 +79,8 @@ const studentsData = [
     fullname: "Siti Aliya Zhafirah",
     role: "Anggota",
     angkatan: "30",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "PMN (Pemasaran)",
     photo: "",
     achievements: []
@@ -90,8 +90,8 @@ const studentsData = [
     fullname: "",
     role: "",
     angkatan: "",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "",
     photo: "",
     achievements: []
@@ -101,8 +101,8 @@ const studentsData = [
     fullname: "Rizky Ikhsan Maulana",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
     photo: "",
     achievements: []
@@ -112,8 +112,8 @@ const studentsData = [
     fullname: "Mustafa Habibi Agnia",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "PMN (Pemasaran)",
     photo: "",
     achievements: []
@@ -123,8 +123,8 @@ const studentsData = [
     fullname: "Muhammad Naufal Alkahfi",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "PPLG (Pengembangan Perangkat Lunak)",
     photo: "",
     achievements: []
@@ -134,8 +134,8 @@ const studentsData = [
     fullname: "Viona Oktora Mulyana Putri",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "HTL (Perhotelan)",
     photo: "",
     achievements: []
@@ -145,8 +145,8 @@ const studentsData = [
     fullname: "Chieka Sharlie Wulandari",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "KLN (Kuliner)",
     photo: "",
     achievements: []
@@ -156,8 +156,8 @@ const studentsData = [
     fullname: "Ferhika Putri Maulidina",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "PMN (Pemasaran)",
     photo: "",
     achievements: []
@@ -167,8 +167,8 @@ const studentsData = [
     fullname: "Siti Erfina Nurmawati",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "MPLB (Manajemen Perkantoran dan Layanan Bisnis)",
     photo: "",
     achievements: []
@@ -178,8 +178,8 @@ const studentsData = [
     fullname: "Alisya Zahwa Nurlatifah",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "PPLG (Pengembangan Perangkat Lunak)",
     photo: "",
     achievements: []
@@ -189,8 +189,8 @@ const studentsData = [
     fullname: "Muhammad Faris Hisyam Azizi",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "HTL (Perhotelan)",
     photo: "",
     achievements: []
@@ -200,8 +200,8 @@ const studentsData = [
     fullname: "Muhammad Asrul Gunawan",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "TJKT (Teknik Jaringan Komputer dan Telekomunikasi)",
     photo: "",
     achievements: []
@@ -211,8 +211,8 @@ const studentsData = [
     fullname: "Danisha Aniq Ayasha Firgiansa",
     role: "Anggota",
     angkatan: "31",
-    isOfficer: false,
-    isAdmin: false,
+    isOfficer: true,
+    isAdmin: true,
     major: "TJKT (Teknik Jaringan Komputer dan Telekomunikasi)",
     photo: "",
     achievements: [
@@ -222,28 +222,6 @@ const studentsData = [
       { title: "Lomba Karate", level: "Kabupaten", date: "2019" },
       { title: "Lomba Karate", level: "Kelas", date: "2022" }
     ]
-  },
-  {
-    nis: "",
-    fullname: "",
-    role: "",
-    angkatan: "",
-    isOfficer: false,
-    isAdmin: false,
-    major: "",
-    photo: "",
-    achievements: []
-  },
-  {
-    nis: "",
-    fullname: "",
-    role: "",
-    angkatan: "",
-    isOfficer: false,
-    isAdmin: false,
-    major: "",
-    photo: "",
-    achievements: []
   },
 ];
 
@@ -257,14 +235,14 @@ const scheduleData = [
 
 const announcementsData = [
   {
-    title: "",
-    date: "",
-    content: "ASCENDING"
+    title: "Pemeriksaan Kebiasaan Baik & Kerapihan",
+    date: "Jumat, 12 September 2026",
+    content: "Dihimbau seluruh anggota Rayon Cisarua 3 berkumpul di 224 tepat pukul 15:10 WIB"
   },
   {
-    title: "t",
-    date: "d",
-    content: "c"
+    title: "Evaluasi Piket Harian Minggu Ini",
+    date: "Rabu, 26 Agustus 2026",
+    content: "Seluruh petugas piket diharapkan menjalankan tugas tepat waktu setelah jam pelajaran terakhir."
   }
 ];
 
