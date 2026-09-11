@@ -19,14 +19,21 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <div class="flex items-center gap-2 pr-2 border-r border-slate-200">
+                    <div class="flex items-center gap-2 pr-3 border-r border-slate-200">
                         <img id="dash-user-avatar" src="" alt="Avatar" class="w-8 h-8 rounded-full border border-brand-orange object-cover">
                         <span id="dash-user-name" class="font-semibold text-xs sm:text-sm text-brand-slate hidden sm:inline-block">User Name</span>
                     </div>
 
+                    <!-- Tutup (kembali ke halaman utama tanpa logout) -->
+                    <button id="dashboard-close-btn" class="text-xs bg-slate-100 hover:bg-slate-200 text-brand-slate px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5">
+                        <i class="fas fa-arrow-left text-[11px]"></i>
+                        <span class="hidden sm:inline">Kembali</span>
+                    </button>
+
+                    <!-- Keluar (logout) -->
                     <button id="logout-btn" class="text-xs bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5">
                         <i class="fas fa-sign-out-alt"></i>
-                        <span>Keluar</span>
+                        <span class="hidden sm:inline">Keluar</span>
                     </button>
                 </div>
 
@@ -99,7 +106,7 @@
                         </div>
                         <div class="flex justify-between items-center py-1 border-t border-slate-50">
                             <span class="text-brand-muted">Pembimbing Rayon</span>
-                            <span class="font-semibold text-brand-slate">Ibu Rina Wulandari, S.Pd.</span>
+                            <span class="font-semibold text-brand-slate">Mohamad Rizal S.Pd</span>
                         </div>
                         <div class="flex justify-between items-center py-1 border-t border-slate-50">
                             <span class="text-brand-muted">Status Kehadiran</span>

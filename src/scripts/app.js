@@ -257,6 +257,7 @@ let tempAvatarSelection = null;
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
   setupStudentSearch();
+  setupStudentsPagination();
   setupNavbarScroll();
   setupMobileMenu();
   setupGalleryLightbox();
@@ -265,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupAvatarModal();
   setupPiketAdminModal();
   setupQuickLoginButtons();
+  setupStudentProfileModal();
 });
 
 // ============================================================
@@ -280,28 +282,47 @@ function setupStudentSearch() {
     const role = roleFilter.value;
     const cards = document.querySelectorAll('[data-student-card]');
     const emptyState = document.getElementById('students-empty-state');
+    const seeMoreWrapper = document.getElementById('students-see-more-wrapper');
+    const isSearching = query.length > 0 || role !== 'ALL';
     let visibleCount = 0;
 
     cards.forEach(card => {
       const fullname = (card.dataset.fullname || '').toLowerCase();
       const nis = card.dataset.nis || '';
       const isOfficer = card.dataset.officer === 'true';
+      const angkatan = card.dataset.angkatan || '';
 
       const matchesQuery = fullname.includes(query) || nis.includes(query);
       const matchesRole = role === 'ALL' ? true :
-        role === 'Pengurus' ? isOfficer : !isOfficer;
+        role === 'Pengurus' ? isOfficer :
+          role === 'Anggota' ? !isOfficer :
+            angkatan === role;
 
       if (matchesQuery && matchesRole) {
-        card.style.display = '';
+        // When actively searching/filtering, show all matching cards regardless of pagination
+        if (isSearching) {
+          card.style.display = '';
+        } else {
+          // Restore pagination state
+          const idx = parseInt(card.dataset.studentIndex || '0');
+          card.style.display = (idx >= 16 && !window._studentsExpanded) ? 'none' : '';
+        }
         visibleCount++;
       } else {
         card.style.display = 'none';
       }
     });
 
+    // Hide see-more button while searching
+    if (seeMoreWrapper) {
+      seeMoreWrapper.style.display = isSearching ? 'none' : '';
+    }
+
     if (emptyState) {
       emptyState.classList.toggle('hidden', visibleCount > 0);
     }
+
+    if (!isSearching) updateSeeMoreButton();
   }
 
   searchInput.addEventListener('input', filterStudents);
@@ -483,19 +504,30 @@ function updateNavState() {
   if (!navAuth) return;
 
   if (loggedInUser) {
+    // Build short rombel label from major string (e.g. "PPLG" from "PPLG (Pengembangan...)") + angkatan
+    const majorShort = (loggedInUser.major || '').split(' ')[0] || 'Siswa';
+    const angkatan = loggedInUser.angkatan ? ` XI-${majorShort}` : majorShort;
+    const rombelLabel = loggedInUser.angkatan
+      ? `${majorShort} XI-${loggedInUser.angkatan === '30' ? '4' : loggedInUser.angkatan}`
+      : majorShort;
+
     navAuth.innerHTML = `
-      <button id="nav-portal-btn" class="flex items-center gap-2 bg-brand-warm border border-brand-light text-brand-orange hover:bg-orange-100 px-4 py-2 rounded-full font-semibold text-xs transition-colors">
-        <img src="${loggedInUser.photo}" class="w-6 h-6 rounded-full object-cover border border-brand-orange">
-        <span>Portal (${loggedInUser.fullname.split(' ')[0]})</span>
-      </button>
-      <button id="nav-logout-btn" class="text-xs text-red-500 font-semibold hover:underline">Keluar</button>
+      <div class="flex items-center gap-2">
+        <div class="text-right hidden sm:block">
+          <p class="font-bold text-sm text-brand-slate leading-tight">${loggedInUser.fullname}</p>
+          <p class="text-xs text-brand-muted">${rombelLabel}</p>
+        </div>
+        <img id="nav-user-photo" src="${loggedInUser.photo}" alt="Foto Profil"
+          class="w-10 h-10 rounded-full object-cover border-2 border-brand-orange shadow cursor-pointer hover:opacity-90 transition-opacity"
+          title="Buka Portal Siswa">
+      </div>
     `;
 
-    document.getElementById('nav-portal-btn').addEventListener('click', () => {
+    document.getElementById('nav-user-photo').addEventListener('click', () => {
       openDashboard(loggedInUser);
     });
 
-    document.getElementById('nav-logout-btn').addEventListener('click', logoutStudent);
+    document.getElementById('nav-logout-btn')?.addEventListener('click', logoutStudent);
   } else {
     navAuth.innerHTML = `
       <button id="nav-login-btn" class="flex items-center gap-2 bg-brand-orange hover:bg-brand-hover text-white px-5 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-brand-orange/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
@@ -516,6 +548,9 @@ function updateNavState() {
 function setupDashboardModal() {
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) logoutBtn.addEventListener('click', logoutStudent);
+
+  const closeBtn = document.getElementById('dashboard-close-btn');
+  if (closeBtn) closeBtn.addEventListener('click', closeDashboardModal);
 }
 
 function openDashboard(student) {
@@ -892,4 +927,75 @@ function renderPiketAdminList() {
       renderPiketAdminList();
     });
   });
+}
+
+// ============================================================
+// STUDENT PROFILE MODAL (click any student card)
+// ============================================================
+function setupStudentProfileModal() {
+  const modal = document.getElementById('student-profile-modal');
+  if (!modal) return;
+
+  function openStudentProfile(student) {
+    if (!student || !student.fullname) return;
+
+    document.getElementById('sp-photo').src = student.photo || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(student.fullname) + '&background=FF6B35&color=fff&size=200';
+    document.getElementById('sp-fullname').textContent = student.fullname;
+    document.getElementById('sp-role').textContent = student.role || 'Anggota';
+    document.getElementById('sp-nis').textContent = student.nis || '-';
+    document.getElementById('sp-major').textContent = student.major || '-';
+    document.getElementById('sp-angkatan').textContent = student.angkatan ? 'Angkatan ' + student.angkatan : '-';
+
+    const angkatanBadge = document.getElementById('sp-angkatan-badge');
+    if (student.angkatan) {
+      angkatanBadge.textContent = 'Angkatan ' + student.angkatan;
+      angkatanBadge.classList.remove('hidden');
+    } else {
+      angkatanBadge.classList.add('hidden');
+    }
+
+    // Achievements
+    const achSection = document.getElementById('sp-achievements-section');
+    const achList = document.getElementById('sp-achievements-list');
+    if (student.achievements && student.achievements.length > 0) {
+      achList.innerHTML = student.achievements.map(a => `
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-amber-50 border border-amber-100">
+          <i class="fas fa-medal text-amber-500 text-lg flex-shrink-0"></i>
+          <div>
+            <p class="text-xs font-bold text-brand-slate">${a.title}</p>
+            <p class="text-[11px] text-amber-600">${a.level} &bull; ${a.date}</p>
+          </div>
+        </div>
+      `).join('');
+      achSection.classList.remove('hidden');
+    } else {
+      achSection.classList.add('hidden');
+    }
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeStudentProfile() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('sp-close-btn').addEventListener('click', closeStudentProfile);
+  document.getElementById('sp-close-bottom-btn').addEventListener('click', closeStudentProfile);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeStudentProfile();
+  });
+
+  // Attach click to all student cards
+  document.querySelectorAll('[data-student-card]').forEach(card => {
+    if (!card.dataset.fullname) return; // skip blank slots
+    card.addEventListener('click', () => {
+      const student = studentsData.find(s => s.nis === card.dataset.nis && s.fullname === card.dataset.fullname);
+      if (student) openStudentProfile(student);
+    });
+  });
+
+  // Expose globally so avatar update can re-sync photo
+  window._openStudentProfile = openStudentProfile;
 }

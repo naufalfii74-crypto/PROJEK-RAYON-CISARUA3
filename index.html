@@ -158,6 +158,49 @@
                     </button>
                 </div>
 
+                <style>
+                .nav-profile-dropdown {
+                    position: relative;
+                }
+                .nav-profile-dropdown-menu {
+                    display: none;
+                    position: absolute;
+                    right: 0;
+                    top: calc(100% + 10px);
+                    background: white;
+                    border: 1px solid #FFEDD5;
+                    border-radius: 16px;
+                    box-shadow: 0 20px 40px rgba(15,23,42,0.12);
+                    min-width: 200px;
+                    z-index: 99;
+                    overflow: hidden;
+                    animation: fadeInDown 0.18s ease;
+                }
+                @keyframes fadeInDown {
+                    from { opacity: 0; transform: translateY(-8px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .nav-profile-dropdown:hover .nav-profile-dropdown-menu,
+                .nav-profile-dropdown.open .nav-profile-dropdown-menu {
+                    display: block;
+                }
+                /* Student Profile Modal */
+                #student-profile-modal {
+                    animation: modalIn 0.25s cubic-bezier(.21,1.02,.73,1);
+                }
+                #student-profile-modal .modal-panel {
+                    animation: slideUp 0.3s cubic-bezier(.21,1.02,.73,1);
+                }
+                @keyframes modalIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(32px) scale(0.97); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
+                }
+                </style>
+
                 <!-- Mobile Hamburger Button -->
                 <div class="lg:hidden flex items-center gap-2">
                     <button onclick="openLoginModal()" class="text-xs bg-brand-warm text-brand-orange border border-brand-light font-semibold px-3 py-2 rounded-lg mr-1">
@@ -297,7 +340,7 @@
                                 </div>
                                 <div>
                                     <p class="text-xs text-brand-muted font-medium">Pembimbing Rayon</p>
-                                    <p class="text-sm font-display font-bold text-brand-slate">Ibu Rina Wulandari, S.Pd.</p>
+                                    <p class="text-sm font-display font-bold text-brand-slate">Mohamad Rizal S.Pd</p>
                                 </div>
                             </div>
                         </div>
@@ -595,7 +638,7 @@
                 <!-- Class Info -->
                 <div class="text-center md:text-right text-xs text-slate-400 space-y-1">
                     <p class="font-medium text-slate-300">SMK Wikrama Bogor &bull; Wilayah Cisarua</p>
-                    <p>Pembimbing: Ibu Rina Wulandari, S.Pd.</p>
+                    <p>Pembimbing: Mohamad Rizal S.Pd</p>
                 </div>
 
             </div>
@@ -804,7 +847,7 @@
                             </div>
                             <div class="flex justify-between items-center py-1 border-t border-slate-50">
                                 <span class="text-brand-muted">Pembimbing Rayon</span>
-                                <span class="font-semibold text-brand-slate">Ibu Rina Wulandari, S.Pd.</span>
+                                <span class="font-semibold text-brand-slate">Mohamad Rizal S.Pd</span>
                             </div>
                             <div class="flex justify-between items-center py-1 border-t border-slate-50">
                                 <span class="text-brand-muted">Status Kehadiran</span>
@@ -917,6 +960,104 @@
         </div>
     </div>
 
+    <!-- ====================================================== -->
+    <!-- Student Profile Modal (View Profile & Achievements)    -->
+    <!-- ====================================================== -->
+    <div id="student-profile-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4" onclick="if(event.target===this)closeStudentProfile()">
+        <div class="modal-panel relative max-w-lg w-full bg-white rounded-3xl shadow-modal border border-slate-100 overflow-hidden max-h-[92vh] flex flex-col">
+            
+            <!-- Close button -->
+            <button onclick="closeStudentProfile()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-white/80 backdrop-blur-sm text-slate-400 hover:text-brand-slate hover:bg-white rounded-full flex items-center justify-center shadow-md transition-all">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+
+            <!-- Header Hero -->
+            <div class="relative bg-gradient-to-br from-brand-orange via-orange-500 to-amber-500 px-8 pt-10 pb-16 text-white overflow-hidden flex-shrink-0">
+                <!-- Decorative circles -->
+                <div class="absolute -top-8 -right-8 w-36 h-36 bg-white/10 rounded-full"></div>
+                <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-white/10 rounded-full"></div>
+
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <!-- Avatar -->
+                    <div class="relative mb-4">
+                        <div class="w-24 h-24 rounded-full border-4 border-white shadow-xl overflow-hidden bg-brand-warm">
+                            <img id="sp-avatar" src="" alt="Profil Siswa" class="w-full h-full object-cover">
+                        </div>
+                        <span id="sp-admin-badge" class="hidden absolute -bottom-1 -right-1 bg-purple-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white shadow">
+                            <i class="fas fa-shield-alt mr-0.5"></i>Admin
+                        </span>
+                    </div>
+
+                    <h3 id="sp-fullname" class="font-display font-extrabold text-2xl leading-tight mb-1">Nama Siswa</h3>
+                    <span id="sp-role" class="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full text-white/90">Anggota</span>
+                </div>
+            </div>
+
+            <!-- Scrollable Body -->
+            <div class="overflow-y-auto flex-1 -mt-8">
+                <!-- Profile Card -->
+                <div class="mx-4 bg-white rounded-2xl border border-slate-100 shadow-lg p-5 mb-4">
+                    <h4 class="font-display font-bold text-xs text-slate-400 uppercase tracking-wider mb-4">Informasi Profil</h4>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-50 rounded-xl p-3">
+                            <p class="text-slate-400 font-medium mb-0.5">NIS</p>
+                            <p id="sp-nis" class="font-mono font-bold text-brand-slate text-sm">-</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-3">
+                            <p class="text-slate-400 font-medium mb-0.5">Angkatan</p>
+                            <p id="sp-angkatan" class="font-bold text-brand-slate text-sm">-</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-3 col-span-2">
+                            <p class="text-slate-400 font-medium mb-0.5">Jurusan</p>
+                            <p id="sp-major" class="font-bold text-brand-slate">-</p>
+                        </div>
+                        <div class="bg-orange-50 rounded-xl p-3 col-span-2 border border-brand-light">
+                            <p class="text-slate-400 font-medium mb-0.5">Rayon</p>
+                            <p class="font-bold text-brand-orange">Cisarua 3 &bull; SMKN 1 Cimahi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements Section -->
+                <div class="mx-4 mb-4">
+                    <!-- Header with count -->
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-display font-bold text-sm text-brand-slate flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-xs">
+                                <i class="fas fa-trophy"></i>
+                            </span>
+                            Prestasi Siswa
+                        </h4>
+                        <span id="sp-ach-count" class="text-xs font-bold bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full border border-amber-200">0</span>
+                    </div>
+
+                    <!-- Achievement list -->
+                    <div id="sp-achievements" class="hidden space-y-3">
+                        <div id="sp-achievements-list" class="space-y-3">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Empty state -->
+                    <div id="sp-achievements-empty" class="text-center py-8 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                        <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-medal text-slate-300 text-xl"></i>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-400">Belum ada prestasi terdaftar</p>
+                        <p class="text-[11px] text-slate-300 mt-0.5">Prestasi siswa akan tampil di sini</p>
+                    </div>
+                </div>
+
+                <!-- Footer actions -->
+                <div class="mx-4 mb-6 flex gap-2">
+                    <button onclick="closeStudentProfile()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-brand-slate font-semibold text-xs py-3 rounded-xl transition-colors">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Piket Admin Management Modal -->
     <div id="piket-admin-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="relative max-w-2xl w-full bg-white rounded-3xl shadow-modal border border-slate-100 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
@@ -975,7 +1116,7 @@
 
         // Mentor Data
         const mentorData = {
-            name: "Ibu Rina Wulandari, S.Pd.",
+            name: "Mohamad Rizal S.Pd",
             title: "Pembimbing Rayon Cisarua 3",
             photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
             bio: "Pendamping dan pengasuh Rayon Cisarua 3 yang berdedikasi dalam membangun kedisiplinan, etika kerja, serta rasa kekeluargaan yang erat bagi para siswa.",
@@ -1272,20 +1413,23 @@
             }
 
             emptyState.classList.add('hidden');
-            container.innerHTML = list.map(student => `
-                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft hover:shadow-hover-lift hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            container.innerHTML = list.filter(s => s.fullname).map(student => `
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft hover:shadow-hover-lift hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group cursor-pointer" onclick="openStudentProfile('${student.nis}')">
                     <div>
                         <div class="flex items-center gap-4 mb-4">
-                            <img src="${student.photo}" alt="${student.fullname}" class="w-14 h-14 rounded-full object-cover border-2 border-brand-warm shadow-sm flex-shrink-0">
+                            <div class="relative flex-shrink-0">
+                                <img src="${student.photo || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(student.fullname) + '&background=FFF7ED&color=F97316&bold=true&size=128'}" alt="${student.fullname}" class="w-14 h-14 rounded-full object-cover border-2 border-brand-warm shadow-sm">
+                                ${student.achievements && student.achievements.length > 0 ? `<span class="absolute -top-1 -right-1 w-5 h-5 bg-amber-400 text-white rounded-full flex items-center justify-center text-[9px] font-bold shadow"><i class="fas fa-trophy"></i></span>` : ''}
+                            </div>
                             <div class="overflow-hidden">
-                                <h4 class="font-display font-bold text-base text-brand-slate truncate">${student.fullname}</h4>
+                                <h4 class="font-display font-bold text-base text-brand-slate truncate group-hover:text-brand-orange transition-colors">${student.fullname}</h4>
                                 <span class="text-xs font-mono font-medium text-brand-muted">NIS: ${student.nis}</span>
                             </div>
                         </div>
                         <div class="space-y-1.5 mb-4">
                             <div class="flex items-center gap-1.5 flex-wrap">
                                 <span class="inline-block text-[11px] font-semibold ${student.isOfficer ? 'bg-brand-warm text-brand-orange border border-brand-light' : 'bg-slate-100 text-slate-600'} px-2.5 py-0.5 rounded-full">
-                                    ${student.role}
+                                    ${student.role || 'Anggota'}
                                 </span>
                                 ${student.angkatan ? `
                                     <span class="inline-block text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full border border-slate-200">
@@ -1296,10 +1440,10 @@
                             <p class="text-xs text-brand-muted font-medium truncate">${student.major}</p>
                         </div>
                     </div>
-                    <button onclick="quickSelectStudent('${student.fullname}', '${student.nis}')" class="w-full text-center py-2 text-xs font-semibold text-brand-orange bg-brand-warm hover:bg-brand-orange hover:text-white rounded-xl transition-colors flex items-center justify-center gap-1.5">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Login Sebagai Siswa</span>
-                    </button>
+                    <div class="w-full text-center py-2 text-xs font-semibold text-brand-orange bg-brand-warm group-hover:bg-brand-orange group-hover:text-white rounded-xl transition-colors flex items-center justify-center gap-1.5 pointer-events-none">
+                        <i class="fas fa-id-card"></i>
+                        <span>Lihat Profil &amp; Prestasi</span>
+                    </div>
                 </div>
             `).join('');
         }
@@ -1663,12 +1807,44 @@
         function updateNavState() {
             const navAuth = document.getElementById('nav-auth-container');
             if (loggedInUser) {
+                const avatarSrc = loggedInUser.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(loggedInUser.fullname)}&background=FFF7ED&color=F97316&bold=true&size=128`;
+                const firstName = loggedInUser.fullname.split(' ')[0];
                 navAuth.innerHTML = `
-                    <button onclick="openDashboard(loggedInUser)" class="flex items-center gap-2 bg-brand-warm border border-brand-light text-brand-orange hover:bg-orange-100 px-4 py-2 rounded-full font-semibold text-xs transition-colors">
-                        <img src="${loggedInUser.photo}" class="w-6 h-6 rounded-full object-cover border border-brand-orange">
-                        <span>Portal (${loggedInUser.fullname.split(' ')[0]})</span>
-                    </button>
-                    <button onclick="logoutStudent()" class="text-xs text-red-500 font-semibold hover:underline">Keluar</button>
+                    <div class="nav-profile-dropdown">
+                        <button id="nav-profile-toggle" class="flex items-center gap-2.5 bg-white border border-slate-200 hover:border-brand-orange px-3 py-1.5 rounded-full font-semibold text-sm transition-all shadow-sm hover:shadow-md group">
+                            <img src="${avatarSrc}" class="w-7 h-7 rounded-full object-cover border-2 border-brand-orange shadow-sm" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(loggedInUser.fullname)}&background=FFF7ED&color=F97316&bold=true&size=128'">
+                            <span class="text-brand-slate text-xs font-bold">${firstName}</span>
+                            <i class="fas fa-chevron-down text-[10px] text-slate-400 group-hover:text-brand-orange transition-colors"></i>
+                        </button>
+                        <div class="nav-profile-dropdown-menu">
+                            <!-- Profile Header -->
+                            <div class="px-4 py-4 bg-gradient-to-br from-brand-warm to-orange-50 border-b border-brand-light">
+                                <div class="flex items-center gap-3">
+                                    <img src="${avatarSrc}" class="w-10 h-10 rounded-full object-cover border-2 border-brand-orange shadow" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(loggedInUser.fullname)}&background=FFF7ED&color=F97316&bold=true&size=128'">
+                                    <div>
+                                        <p class="font-display font-bold text-sm text-brand-slate leading-tight">${loggedInUser.fullname}</p>
+                                        <p class="text-[11px] text-brand-orange font-medium">${loggedInUser.role} · Rayon Cisarua 3</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Menu Items -->
+                            <div class="py-2">
+                                <button onclick="openDashboard(loggedInUser)" class="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-brand-slate hover:bg-brand-warm hover:text-brand-orange transition-colors text-left">
+                                    <i class="fas fa-user-circle w-4 text-center text-brand-orange"></i>
+                                    Portal Siswa Saya
+                                </button>
+                                <button onclick="openStudentProfile('${loggedInUser.nis}')" class="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-brand-slate hover:bg-brand-warm hover:text-brand-orange transition-colors text-left">
+                                    <i class="fas fa-id-card w-4 text-center text-brand-orange"></i>
+                                    Lihat Profil Saya
+                                </button>
+                                <div class="mx-4 my-1.5 border-t border-slate-100"></div>
+                                <button onclick="logoutStudent()" class="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-red-500 hover:bg-red-50 transition-colors text-left">
+                                    <i class="fas fa-sign-out-alt w-4 text-center"></i>
+                                    Keluar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 `;
             } else {
                 navAuth.innerHTML = `
@@ -1677,6 +1853,70 @@
                         <span>Login Siswa</span>
                     </button>
                 `;
+            }
+        }
+
+        // Student Profile Modal (read-only)
+        function openStudentProfile(nis) {
+            const student = studentsData.find(s => s.nis === nis);
+            if (!student || !student.fullname) return;
+
+            const modal = document.getElementById('student-profile-modal');
+            if (!modal) return;
+
+            const avatarSrc = student.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(student.fullname)}&background=FFF7ED&color=F97316&bold=true&size=256`;
+
+            document.getElementById('sp-avatar').src = avatarSrc;
+            document.getElementById('sp-avatar').onerror = function() { this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(student.fullname)}&background=FFF7ED&color=F97316&bold=true&size=256`; };
+            document.getElementById('sp-fullname').textContent = student.fullname;
+            document.getElementById('sp-role').textContent = student.role || 'Anggota';
+            document.getElementById('sp-nis').textContent = student.nis;
+            document.getElementById('sp-major').textContent = student.major;
+            document.getElementById('sp-angkatan').textContent = student.angkatan ? `Angkatan ${student.angkatan}` : '-';
+
+            // Admin badge
+            const adminBadge = document.getElementById('sp-admin-badge');
+            if (student.isAdmin) { adminBadge.classList.remove('hidden'); } else { adminBadge.classList.add('hidden'); }
+
+            // Achievements
+            const achContainer = document.getElementById('sp-achievements');
+            const achEmpty = document.getElementById('sp-achievements-empty');
+            const achCount = document.getElementById('sp-ach-count');
+            if (student.achievements && student.achievements.length > 0) {
+                achContainer.classList.remove('hidden');
+                achEmpty.classList.add('hidden');
+                achCount.textContent = student.achievements.length;
+                document.getElementById('sp-achievements-list').innerHTML = student.achievements.map((a, i) => `
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-100 hover:border-amber-300 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400 text-white flex items-center justify-center flex-shrink-0 shadow">
+                            <i class="fas fa-medal text-sm"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h5 class="font-display font-bold text-sm text-brand-slate mb-1">${a.title}</h5>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-200">
+                                    <i class="fas fa-map-marker-alt text-[9px]"></i> ${a.level}
+                                </span>
+                                <span class="text-[11px] text-slate-400 font-medium">${a.date}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                achContainer.classList.add('hidden');
+                achEmpty.classList.remove('hidden');
+                achCount.textContent = '0';
+            }
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeStudentProfile() {
+            const modal = document.getElementById('student-profile-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
             }
         }
 
